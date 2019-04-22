@@ -66,7 +66,39 @@
         </td>
     </tr>
 </table>
+<table>
+    <tr>
 
+        <th>
+            Attempt #
+        </th>
+        <th colspan="2">
+            Decription
+        </th>
+        <th colspan="2">
+            Feedback
+        </th>
+    </tr>
+    <c:forEach items="${attemptsList}" var="attempt" varStatus="loop">
+        <tr>
+            <td>
+                    ${loop.count}
+            </td>
+            <td colspan="2">
+                    ${attempt.decription}
+            </td>
+            <td colspan="2">
+                    ${attempt.feedback}
+            </td>
+        </tr>
+    </c:forEach>
+    <tr>
+        <td></td>
+        <td colspan="2">
+            <form:form method="post" modelAttribute=""
+        </td>
+    </tr>
+</table>
 
 
 </body>

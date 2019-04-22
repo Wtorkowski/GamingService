@@ -2,6 +2,7 @@ package com.gamingService.web.controllers;
 
 import com.gamingService.dto.RegistrationFormDTO;
 import com.gamingService.services.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,13 +15,10 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/register")
+@AllArgsConstructor
 public class RegistrationController {
 
     private UserService userService;
-
-    public RegistrationController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping
     public String prepareRegistrationPage(Model model) {
@@ -39,8 +37,8 @@ public class RegistrationController {
 //            result.rejectValue("username", null, "Nazwa użytkownika jest już zajęta");
 //            return "registration";
 //        }
-        if (!userService.isRePassEqual(registrationFormDTO)) {
-            result.rejectValue("password", "rePassNotEqualPass");
+        if (!userService.isRepeatPasswordEqual(registrationFormDTO)) {
+            result.rejectValue("password", "passwordsNotEqual");
             return "register";
         }
         userService.registerUser(registrationFormDTO);

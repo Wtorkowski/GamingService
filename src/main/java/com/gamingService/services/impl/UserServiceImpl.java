@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isRePassEqual(RegistrationFormDTO registrationFormDTO) {
+    public boolean isRepeatPasswordEqual(RegistrationFormDTO registrationFormDTO) {
         return registrationFormDTO.getPassword().equals(registrationFormDTO.getRepeatPassword());
     }
 

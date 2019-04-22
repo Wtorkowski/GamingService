@@ -12,4 +12,10 @@ public class MainMenuController {
     public String prepareMainMenuPage() {
         return "main_menu";
     }
+
+    @PostMapping
+    public String redirectToGamePAge(@RequestParam String difficulty, Model model) {
+        model.addAttribute("difficulty", difficulty);
+        return "game";
+    }
 }

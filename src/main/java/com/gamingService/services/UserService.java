@@ -11,5 +11,5 @@ public interface UserService {
 
     void registerUser(RegistrationFormDTO registrationFormDTO);
 
-    boolean isRePassEqual(RegistrationFormDTO registrationFormDTO);
+    boolean isRepeatPasswordEqual(RegistrationFormDTO registrationFormDTO);
 }

@@ -17,7 +17,7 @@
 <body>
 
 <table style="text-align: center">
-  <h1>Main Menu</h1>
+    <h1>Main Menu</h1>
     <tr>
         <td colspan="3"><br></td>
     </tr>
@@ -25,9 +25,9 @@
         <th colspan="3">Choose difficulty level to start game:</th>
     </tr>
     <tr>
-     <td>
-         <button onclick=window.location.href="/game/easy">Easy</button>
-     </td>
+        <td>
+            <button onclick=window.location.href="/game/easy">Easy</button>
+        </td>
         <td>
             <button onclick=window.location.href="/game/medium">Medium</button>
         </td>
