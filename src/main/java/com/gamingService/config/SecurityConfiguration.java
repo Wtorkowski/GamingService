@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -23,6 +25,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Bean
+    public Authentication authentication() {
+        return SecurityContextHolder.getContext().getAuthentication();
     }
 
     @Override
@@ -44,7 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/main_menu").authenticated()
                 .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
-                .antMatchers("/home", "/register","/registered_successfully").anonymous()
+                .antMatchers("/home", "/register", "/registered_successfully").anonymous()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -53,4 +60,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/home");
     }
+
 }

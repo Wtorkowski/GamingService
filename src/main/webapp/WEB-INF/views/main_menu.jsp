@@ -22,7 +22,7 @@
         <td colspan="3"><br></td>
     </tr>
     <tr>
-        <th colspan="3">Choose difficulty level to start game:</th>
+        <th colspan="3">Choose difficulty level to start a new game:</th>
     </tr>
     <tr>
         <td>

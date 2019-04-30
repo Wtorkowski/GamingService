@@ -7,4 +7,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     //TODO
 //    boolean isUsernameAvailable(String username);
+    User findByUserName(String username);
+
 }

@@ -1,11 +1,16 @@
 package com.gamingService.domain.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "users")
 public class User extends AbstractEntity {
 
@@ -13,11 +18,15 @@ public class User extends AbstractEntity {
     @Column(unique = true, nullable = false)
     private String userName;
 
+
     @Column(nullable = false)
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<GameHistory> gameHistories;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<MastermindAttempts> mastermindAttempts;
 
     public User() {
     }
@@ -25,6 +34,15 @@ public class User extends AbstractEntity {
     public User(@Size(min = 3, max = 20) String userName, String password) {
         this.userName = userName;
         this.password = password;
+    }
+
+    public List<MastermindAttempts> getMastermindAttempts() {
+        return mastermindAttempts;
+    }
+
+    public User setMastermindAttempts(List<MastermindAttempts> mastermindAttempts) {
+        this.mastermindAttempts = mastermindAttempts;
+        return this;
     }
 
     public String getUserName() {

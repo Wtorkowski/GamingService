@@ -66,40 +66,51 @@
         </td>
     </tr>
 </table>
-<table>
+<table style="text-align: center">
     <tr>
 
         <th>
-            Attempt #
+            Attempts
         </th>
-        <th colspan="2">
+        <th>
             Decription
         </th>
-        <th colspan="2">
+        <th>
             Feedback
         </th>
     </tr>
     <c:forEach items="${attemptsList}" var="attempt" varStatus="loop">
-        <tr>
+        <tr style="text-align: center">
             <td>
                     ${loop.count}
             </td>
-            <td colspan="2">
-                    ${attempt.decription}
+            <td>
+                    ${attempt.decriptionAttempt}
             </td>
-            <td colspan="2">
+            <td>
                     ${attempt.feedback}
             </td>
         </tr>
     </c:forEach>
+
     <tr>
-        <td></td>
-        <td colspan="2">
-            <form:form method="post" modelAttribute=""
-        </td>
+        <form:form method="post" modelAttribute="decription">
+            <td><form:errors path="decription"/></td>
+            <td>
+                <c:choose>
+                    <c:when test="${difficulty == 'easy'}">
+                        <form:input path="decription" pattern="[1-4]{4,4}"/>
+                        <input type="submit" value="Submit"> </c:when>
+                    <c:when test="${difficulty == 'medium'}">
+                        <form:input path="decription" pattern="[1-6]{4,4}"/>
+                        <input type="submit" value="Submit"> </c:when>
+                    <c:when test="${difficulty == 'hard'}">
+                        <form:input path="decription" pattern="[1-6]{5,5}"/>
+                        <input type="submit" value="Submit"> </c:when>
+                </c:choose>
+            </td>
+        </form:form>
     </tr>
 </table>
-
-
 </body>
 </html>
