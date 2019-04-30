@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Game Over</title>
+    <title>Mastermind game over</title>
 </head>
 <body>
-<h1>Game Over</h1>
+<h1>Congratulation</h1>
 </body>
 </html>

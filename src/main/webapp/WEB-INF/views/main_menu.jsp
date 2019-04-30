@@ -21,20 +21,9 @@
     <tr>
         <td colspan="3"><br></td>
     </tr>
-    <tr>
-        <th colspan="3">Choose difficulty level to start a new game:</th>
-    </tr>
-    <tr>
-        <td>
-            <button onclick=window.location.href="/game/easy">Easy</button>
-        </td>
-        <td>
-            <button onclick=window.location.href="/game/medium">Medium</button>
-        </td>
-        <td>
-            <button onclick=window.location.href="/game/hard">Hard</button>
-        </td>
-    </tr>
+    <td>
+        <button onclick=window.location.href="/mastermind/home">Mastermind</button>
+    </td>
     <tr>
         <td colspan="3"><br></td>
     </tr>

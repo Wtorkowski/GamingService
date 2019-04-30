@@ -17,5 +17,5 @@ public interface UserService {
 
     UserDTO getLoggedUser();
 
-    User userEntity();
+    User currentUserEntity();
 }

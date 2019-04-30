@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     private LoggedUser loggedUser;
 
     @Override
-    public User userEntity() {
+    public User currentUserEntity() {
         String userNameDTO = loggedUser.value().getUserName();
         return userRepository.findByUserName(userNameDTO);
     }

@@ -23,7 +23,7 @@ public class User extends AbstractEntity {
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<GameHistory> gameHistories;
+    private List<GameHistory> gamesHistory;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<MastermindAttempts> mastermindAttempts;
@@ -42,33 +42,6 @@ public class User extends AbstractEntity {
 
     public User setMastermindAttempts(List<MastermindAttempts> mastermindAttempts) {
         this.mastermindAttempts = mastermindAttempts;
-        return this;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public User setUserName(String userName) {
-        this.userName = userName;
-        return this;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public User setPassword(String password) {
-        this.password = password;
-        return this;
-    }
-
-    public List<GameHistory> getGameHistories() {
-        return gameHistories;
-    }
-
-    public User setGameHistories(List<GameHistory> gameHistories) {
-        this.gameHistories = gameHistories;
         return this;
     }
 
@@ -91,7 +64,7 @@ public class User extends AbstractEntity {
         return "User{" +
                 "userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", gameHistories=" + gameHistories +
+                ", gameHistories=" + gamesHistory +
                 "} " + super.toString();
     }
 }

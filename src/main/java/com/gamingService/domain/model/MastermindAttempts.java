@@ -22,9 +22,6 @@ public class MastermindAttempts {
 
     private LocalDateTime created;
 
-    @Size(min = 4, max = 9)
-    private String difficultyLevel;
-
     @Column(nullable = false)
     private String feedback;
 

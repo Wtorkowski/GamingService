@@ -2,8 +2,7 @@ package com.gamingService.services.converters;
 
 import com.gamingService.domain.model.MastermindAttempts;
 import com.gamingService.domain.model.User;
-import com.gamingService.dto.Decription;
-import com.gamingService.dto.MastermindAttemptsDTO;
+import com.gamingService.domain.model.Decription;
 import com.gamingService.dto.RegistrationFormDTO;
 import com.gamingService.dto.UserDTO;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -22,15 +21,14 @@ public class ConverterFactory {
         return userDTO;
     }
 
-    public static MastermindAttempts fromResourceToAttempts(MastermindAttemptsDTO mastermindAttemptsDTO,
-                                                            String difficulty,
-                                                            Decription decription,
-                                                            User user) {
+    public static MastermindAttempts fromResourcesToAttempts(String encrypted,
+                                                             String feedback,
+                                                             Decription decription,
+                                                             User user) {
         MastermindAttempts attempt = new MastermindAttempts();
-        attempt.setDifficultyLevel(difficulty);
         attempt.setDecriptionAttempt(decription.getDecription());
-        attempt.setEncrypted(mastermindAttemptsDTO.getEncrypted());
-        attempt.setFeedback(mastermindAttemptsDTO.getFeedback());
+        attempt.setEncrypted(encrypted);
+        attempt.setFeedback(feedback);
         attempt.setUser(user);
         return attempt;
     }

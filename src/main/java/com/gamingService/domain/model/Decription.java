@@ -1,4 +1,4 @@
-package com.gamingService.dto;
+package com.gamingService.domain.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
