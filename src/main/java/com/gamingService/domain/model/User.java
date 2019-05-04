@@ -23,7 +23,7 @@ public class User extends AbstractEntity {
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<GameHistory> gamesHistory;
+    private List<GamesHistory> gamesHistory;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<MastermindAttempts> mastermindAttempts;

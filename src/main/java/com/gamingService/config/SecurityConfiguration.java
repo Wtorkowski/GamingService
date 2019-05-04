@@ -2,6 +2,7 @@ package com.gamingService.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -43,13 +44,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+//        web.ignoring()
+//                .antMatchers("/mastermind/home");
         super.configure(web);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/main_menu").authenticated()
+                .antMatchers(HttpMethod.POST, "/mastermind/home").authenticated()
+                .antMatchers("/main_menu", "/mastermind/**").authenticated()
                 .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
                 .antMatchers("/home", "/register", "/registered_successfully").anonymous()
                 .anyRequest().authenticated()
@@ -58,7 +62,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/main_menu")
                 .and()
                 .logout()
-                .logoutSuccessUrl("/home");
+                .logoutSuccessUrl("/home")
+                .and()
+                .csrf().disable();
     }
-
 }

@@ -15,7 +15,7 @@ import java.time.Duration;
 @Setter
 @NoArgsConstructor
 @Table(name = "games_history")
-public class GameHistory extends AbstractEntity {
+public class GamesHistory extends AbstractEntity {
 
     @ManyToOne
     private User user;
@@ -26,12 +26,13 @@ public class GameHistory extends AbstractEntity {
     @Column(nullable = false)
     private String difficulty;
 
-    @Column(nullable = false)
     private Duration duration;
 
     private int attempts;
 
-    public GameHistory(User user, String gameName, String difficulty, Duration duration, int attempts) {
+    private String encrypted;
+
+    public GamesHistory(User user, String gameName, String difficulty, Duration duration, int attempts) {
         this.user = user;
         this.gameName = gameName;
         this.difficulty = difficulty;

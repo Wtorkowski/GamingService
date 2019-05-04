@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("main_menu")
+@RequestMapping("/main_menu")
 public class MainMenuController {
 
     @GetMapping

@@ -1,5 +1,6 @@
 package com.gamingService.services.converters;
 
+import com.gamingService.domain.model.GamesHistory;
 import com.gamingService.domain.model.MastermindAttempts;
 import com.gamingService.domain.model.User;
 import com.gamingService.domain.model.Decription;
@@ -21,13 +22,11 @@ public class ConverterFactory {
         return userDTO;
     }
 
-    public static MastermindAttempts fromResourcesToAttempts(String encrypted,
-                                                             String feedback,
+    public static MastermindAttempts fromResourcesToAttempts(String feedback,
                                                              Decription decription,
                                                              User user) {
         MastermindAttempts attempt = new MastermindAttempts();
         attempt.setDecriptionAttempt(decription.getDecription());
-        attempt.setEncrypted(encrypted);
         attempt.setFeedback(feedback);
         attempt.setUser(user);
         return attempt;
@@ -41,4 +40,16 @@ public class ConverterFactory {
         user.setCreated(LocalDateTime.now());
         return user;
     }
+
+    public static GamesHistory mastermindStartGameResources(String encrypted, User user, String difficulty) {
+        GamesHistory gamesHistory = new GamesHistory();
+        gamesHistory.setGameName("mastermind");
+        gamesHistory.setAttempts(0);
+        gamesHistory.setEncrypted(encrypted);
+        gamesHistory.setUser(user);
+        gamesHistory.setDifficulty(difficulty);
+        return gamesHistory;
+    }
+
+
 }

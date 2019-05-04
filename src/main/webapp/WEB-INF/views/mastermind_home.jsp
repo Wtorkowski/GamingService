@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: bart
@@ -33,13 +34,18 @@
     </tr>
     <tr>
         <td>
-            <button onclick=window.location.href="/mastermind/game/easy">Easy</button>
-        </td>
-        <td>
-            <button onclick=window.location.href="/mastermind/game/medium">Medium</button>
-        </td>
-        <td>
-            <button onclick=window.location.href="/mastermind/game/hard">Hard</button>
+            <form action="/mastermind/home" method="POST">
+                <label>
+                    <input type="radio" name="difficulty" value="easy">
+                </label>Easy<br>
+                <label>
+                    <input type="radio" name="difficulty" value="medium" checked>
+                </label>Medium<br>
+                <label>
+                    <input type="radio" name="difficulty" value="hard">
+                </label>Hard<br>
+                <input type="submit" value="Start game">
+            </form>
         </td>
     </tr>
 </table>

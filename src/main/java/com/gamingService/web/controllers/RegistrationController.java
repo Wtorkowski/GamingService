@@ -1,7 +1,8 @@
 package com.gamingService.web.controllers;
 
 import com.gamingService.dto.RegistrationFormDTO;
-import com.gamingService.services.UserService;
+import com.gamingService.services.impl.UserServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,15 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+@AllArgsConstructor
 @Controller
 @RequestMapping("/register")
 public class RegistrationController {
 
-    private UserService userService;
+    private UserServiceImpl userService;
 
-    public RegistrationController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping
     public String prepareRegistrationPage(Model model) {

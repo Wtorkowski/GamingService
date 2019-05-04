@@ -4,7 +4,7 @@ import com.gamingService.core.components.LoggedUser;
 import com.gamingService.domain.model.Decription;
 import com.gamingService.domain.model.MastermindAttempts;
 import com.gamingService.domain.model.User;
-import com.gamingService.domain.repositories.CurrentGameRepository;
+import com.gamingService.domain.repositories.MastermindRepository;
 import com.gamingService.services.MastermindService;
 import com.gamingService.services.converters.ConverterFactory;
 import lombok.AllArgsConstructor;
@@ -16,18 +16,14 @@ import java.util.*;
 @AllArgsConstructor
 public class MastermindServiceImpl implements MastermindService {
 
-    private CurrentGameRepository currentGameRepository;
+    private MastermindRepository mastermindRepository;
     private LoggedUser loggedUser;
 
-    @Override
-    public String getEncryptedCode() {
-        String userName = loggedUser.value().getUserName();
-        return currentGameRepository.getEncryptedCode(userName);
-    }
+
 
     @Override
     public List<MastermindAttempts> findAllAttemptsByCreated() {
-        return currentGameRepository.findAllByOrderByCreated();
+        return mastermindRepository.findAllByOrderByCreated();
     }
 
     @Override
@@ -41,8 +37,8 @@ public class MastermindServiceImpl implements MastermindService {
                             Decription decription,
                             User user) {
         MastermindAttempts attemptToSave =
-                ConverterFactory.fromResourcesToAttempts(encrypted, feedback, decription, user);
-        currentGameRepository.save(attemptToSave);
+                ConverterFactory.fromResourcesToAttempts(feedback, decription, user);
+        mastermindRepository.save(attemptToSave);
     }
 
     @Override
@@ -127,17 +123,5 @@ public class MastermindServiceImpl implements MastermindService {
             codeLength = 5;
         }
         return codeLength;
-    }
-
-    @Override
-    public boolean noCurrentGame() {
-        return currentGameRepository.isAttemptTableEmpty();
-    }
-
-    private Map<Integer, String> codeToMap(String code) {
-        Map<Integer, String> stringToMap = new HashMap<>();
-        Arrays.stream(code.split(""))
-                .forEach(c -> stringToMap.put(stringToMap.size(), c));
-        return stringToMap;
     }
 }
