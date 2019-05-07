@@ -14,7 +14,7 @@
 <body>
 
 <c:out value="${registered_user_name} successfully registered."/>
-<button onclick=window.location.href="login">Sign in</button>
+<button onclick=window.location.href="/login">Sign in</button>
 
 </body>
 </html>

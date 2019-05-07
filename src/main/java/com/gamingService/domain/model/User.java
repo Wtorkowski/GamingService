@@ -67,4 +67,5 @@ public class User extends AbstractEntity {
                 ", gameHistories=" + gamesHistory +
                 "} " + super.toString();
     }
+
 }

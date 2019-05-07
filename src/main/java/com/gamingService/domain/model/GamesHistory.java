@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.time.Duration;
 
 @Entity
 @Getter
@@ -26,18 +25,12 @@ public class GamesHistory extends AbstractEntity {
     @Column(nullable = false)
     private String difficulty;
 
-    private Duration duration;
+    private long duration;
 
     private int attempts;
 
     private String encrypted;
 
-    public GamesHistory(User user, String gameName, String difficulty, Duration duration, int attempts) {
-        this.user = user;
-        this.gameName = gameName;
-        this.difficulty = difficulty;
-        this.duration = duration;
-        this.attempts = attempts;
-    }
+
 
 }

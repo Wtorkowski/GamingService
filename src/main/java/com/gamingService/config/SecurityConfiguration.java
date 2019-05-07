@@ -55,7 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/mastermind/home").authenticated()
                 .antMatchers("/main_menu", "/mastermind/**").authenticated()
                 .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
-                .antMatchers("/home", "/register", "/registered_successfully").anonymous()
+                .antMatchers("/home", "/register", "/register/**").anonymous()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

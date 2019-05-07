@@ -25,9 +25,6 @@ public class MastermindAttempts {
     @Column(nullable = false)
     private String feedback;
 
-//    @Size(min = 4, max = 5)
-//    private String encrypted;
-
     @Column(nullable = false)
     @Size(min = 4, max = 5)
     private String decriptionAttempt;
@@ -40,3 +37,4 @@ public class MastermindAttempts {
         created = LocalDateTime.now();
     }
 }
+

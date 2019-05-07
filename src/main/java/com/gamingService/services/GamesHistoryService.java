@@ -1,10 +1,26 @@
 package com.gamingService.services;
 
-import com.gamingService.domain.model.User;
+import com.gamingService.domain.model.GamesHistory;
+import com.gamingService.dto.MastermindLastGameHistoryDTO;
+import com.gamingService.dto.MastermindTopScoresDTO;
+
+import java.util.List;
 
 public interface GamesHistoryService {
 
-    boolean deleteUnfinishedMastermindGames(User user, String gameName);
+    String generateEncryptedCode(String difficulty);
 
-    void startMastermindGame(User user, String difficulty, String encrypted);
+    void createMastermindGameHistory(String difficulty);
+
+    void deletePreviousUnfinishedGames();
+
+    String getMastermindEncryptedCode(String difficulty);
+
+    GamesHistory updateFinishedMastermindGame();
+
+    List<MastermindTopScoresDTO> getTopScoresList(String difficulty);
+
+    void saveFinishedGame(GamesHistory gamesHistory);
+
+    MastermindLastGameHistoryDTO getLastMastermindGameHistoryDTO(GamesHistory gamesHistory);
 }

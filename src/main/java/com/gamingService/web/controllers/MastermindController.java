@@ -1,10 +1,10 @@
 package com.gamingService.web.controllers;
 
+import com.gamingService.core.components.LoggedUser;
 import com.gamingService.domain.model.Decription;
-import com.gamingService.domain.model.User;
+import com.gamingService.domain.model.GamesHistory;
 import com.gamingService.services.impl.GamesHistoryServiceImpl;
 import com.gamingService.services.impl.MastermindServiceImpl;
-import com.gamingService.services.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,20 +18,18 @@ public class MastermindController {
 
     private GamesHistoryServiceImpl gamesHistoryService;
     private MastermindServiceImpl mastermindService;
-    private UserServiceImpl userService;
-
+    private LoggedUser loggedUser;
 
     @GetMapping("/home")
-    public String prepareMmHomePage(Model model) {
+    public String prepareMmHomePage() {
         return "mastermind_home";
     }
 
     @PostMapping("/home")
     public String formRequest(@RequestParam("difficulty") String difficulty) {
-        User currentUser = userService.currentUserEntity();
-        System.out.println(currentUser);
-//        String encryptedCode = mastermindService.generateEncryptedCode(difficulty);
-//        gamesHistoryService.startMastermindGame(currentUser, difficulty, encryptedCode);
+        mastermindService.clearAttemptsTable();
+        gamesHistoryService.deletePreviousUnfinishedGames();
+        gamesHistoryService.createMastermindGameHistory(difficulty);
         return "redirect:/mastermind/game/" + difficulty;
     }
 
@@ -47,26 +45,33 @@ public class MastermindController {
                        @ModelAttribute Decription decription,
                        Model model,
                        BindingResult result) {
+
         model.addAttribute("difficulty", difficulty);
-        model.addAttribute("attemptsList", mastermindService.findAllAttemptsByCreated());
-
-
-        if (!mastermindService.isInputPatternCorrect(difficulty, decription)) {
+        model.addAttribute("attemptsList", mastermindService.findAllAttemptsByUserId());
+        if (!mastermindService.isDecriptionInputPatternCorrect(difficulty, decription)) {
             result.rejectValue("decription", "attemptPattern");
             return "mastermind";
         }
+        mastermindService.saveAttempt(decription, difficulty);
+        model.addAttribute("attemptsList", mastermindService.findAllAttemptsByUserId());
+
+        if (mastermindService.isCombinationDecrypted(decription, difficulty)) {
+            return "redirect:/mastermind/game_over/" + difficulty;
+        }
 
 
+        //TODO remove following 2 lanes at the end of development:
+        String encryptedCode = gamesHistoryService.getMastermindEncryptedCode(difficulty);
+        model.addAttribute("encrypted", encryptedCode);
 
-//TODO getEncryptedCode from first input in masterind attempts
-//        String encryptedCode = .getEncryptedCode();
-//        String feedback = mastermindService.generateFeedback(encryptedCode, decription, difficulty);
-//        mastermindService.saveAttempt(encryptedCode, feedback, decription, currentUser);
-//        model.addAttribute("attemptsList", mastermindService.findAllAttemptsByCreated());
-//
-//        if (mastermindService.isCombinationDecrypted(decription, encryptedCode)) {
-//            return "mastermind_game_over";
-//        }
         return "mastermind";
+    }
+
+    @GetMapping("/game_over/{difficulty}")
+    public String generateGameOverPage(@PathVariable String difficulty, Model model) {
+        GamesHistory finishedGame = gamesHistoryService.updateFinishedMastermindGame();
+        model.addAttribute("finishedGame", gamesHistoryService.getLastMastermindGameHistoryDTO(finishedGame));
+        model.addAttribute("topScores", gamesHistoryService.getTopScoresList(difficulty));
+        return "mastermind_game_over";
     }
 }

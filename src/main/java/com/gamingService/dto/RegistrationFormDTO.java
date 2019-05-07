@@ -1,6 +1,5 @@
 package com.gamingService.dto;
 
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
@@ -12,6 +11,7 @@ public class RegistrationFormDTO {
 
     @NotBlank
     @Size(min = 3, max = 20)
+    //TODO unique userName validation
     private String userName;
 
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,20}$",

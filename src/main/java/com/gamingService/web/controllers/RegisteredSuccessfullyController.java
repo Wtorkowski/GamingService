@@ -10,6 +10,6 @@ public class RegisteredSuccessfullyController {
 
     @GetMapping
     public String prepareRegSuccPage() {
-        return "registered_successfully";
+        return "registration_successful";
     }
 }

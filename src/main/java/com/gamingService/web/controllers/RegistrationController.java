@@ -6,10 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -20,6 +17,11 @@ public class RegistrationController {
 
     private UserServiceImpl userService;
 
+    @GetMapping("/successful/{user_name}")
+    public String registrationSuccessful(@PathVariable("user_name") String userName,Model model) {
+        model.addAttribute("registered_user_name", userName);
+        return "registration_successful";
+    }
 
     @GetMapping
     public String prepareRegistrationPage(Model model) {
@@ -43,7 +45,6 @@ public class RegistrationController {
             return "register";
         }
         userService.registerUser(registrationFormDTO);
-        model.addAttribute("registered_user_name", registrationFormDTO.getUserName());
-        return "registered_successfully";
+        return "redirect:/register/successful/" + registrationFormDTO.getUserName();
     }
 }

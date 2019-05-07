@@ -3,46 +3,51 @@ package com.gamingService.services.impl;
 import com.gamingService.core.components.LoggedUser;
 import com.gamingService.domain.model.Decription;
 import com.gamingService.domain.model.MastermindAttempts;
-import com.gamingService.domain.model.User;
-import com.gamingService.domain.repositories.MastermindRepository;
+import com.gamingService.domain.repositories.GamesHistoryRepository;
+import com.gamingService.domain.repositories.MastermindAttemptsRepository;
 import com.gamingService.services.MastermindService;
 import com.gamingService.services.converters.ConverterFactory;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
 
-@Service
 @AllArgsConstructor
+@Service
 public class MastermindServiceImpl implements MastermindService {
 
-    private MastermindRepository mastermindRepository;
+    private MastermindAttemptsRepository mastermindAttemptsRepository;
+    private GamesHistoryRepository gamesHistoryRepository;
     private LoggedUser loggedUser;
 
 
-
     @Override
-    public List<MastermindAttempts> findAllAttemptsByCreated() {
-        return mastermindRepository.findAllByOrderByCreated();
+    public List<MastermindAttempts> findAllAttemptsByUserId() {
+        return mastermindAttemptsRepository.findAllByUserIdIsOrderByCreated(loggedUser.value().getId());
     }
 
     @Override
-    public boolean isCombinationDecrypted(Decription decriptionDTO, String encryptedCode) {
+    public void clearAttemptsTable() {
+        mastermindAttemptsRepository.deleteMastermindAttemptsByUserIdIs(loggedUser.value().getId());
+    }
+
+
+    @Override
+    public boolean isCombinationDecrypted(Decription decriptionDTO, String difficulty) {
+        String encryptedCode = gamesHistoryRepository.getEncryptedCode(loggedUser.value().getId(), difficulty);
         return decriptionDTO.getDecription().equals(encryptedCode);
     }
 
     @Override
-    public void saveAttempt(String encrypted,
-                            String feedback,
-                            Decription decription,
-                            User user) {
+    public void saveAttempt(Decription decription, String difficulty) {
+        String feedback = generateFeedback(decription, difficulty);
         MastermindAttempts attemptToSave =
-                ConverterFactory.fromResourcesToAttempts(feedback, decription, user);
-        mastermindRepository.save(attemptToSave);
+                ConverterFactory.fromResourcesToMastermindAttempts(feedback, decription, loggedUser.currentUserEntity());
+        mastermindAttemptsRepository.save(attemptToSave);
     }
 
     @Override
-    public boolean isInputPatternCorrect(String difficulty, Decription decription) {
+    public boolean isDecriptionInputPatternCorrect(String difficulty, Decription decription) {
         String regexp = decriptionRegexp(difficulty);
         return decription.getDecription().matches(regexp);
     }
@@ -63,29 +68,10 @@ public class MastermindServiceImpl implements MastermindService {
         }
     }
 
-    @Override
-    public String generateEncryptedCode(String difficulty) {
-        StringBuilder encryptedCode = new StringBuilder();
-        int codeLength = encryptedCodeLength(difficulty);
-        int bound = encryptedCodeBound(difficulty);
-        Random r = new Random();
-        for (int i = 0; i < codeLength; i++) {
-            encryptedCode.append(r.nextInt(bound) + 1);
-        }
-        return encryptedCode.toString();
-    }
-
-    private int encryptedCodeBound(String difficulty) {
-        int bound = 6;
-        if (difficulty.equals("easy")) {
-            bound = 4;
-        }
-        return bound;
-    }
 
     @Override
-    public String generateFeedback(String encryptedCode, Decription decription, String difficulty) {
-
+    public String generateFeedback(Decription decription, String difficulty) {
+        String encryptedCode = gamesHistoryRepository.getEncryptedCode(loggedUser.value().getId(), difficulty);
         StringBuilder feedback = new StringBuilder();
         StringBuilder encrypted = new StringBuilder(encryptedCode);
         String playersAttempt = decription.getDecription();
@@ -117,11 +103,13 @@ public class MastermindServiceImpl implements MastermindService {
         return feedback.toString();
     }
 
-    private int encryptedCodeLength(String difficulty) {
+    private static int encryptedCodeLength(String difficulty) {
         int codeLength = 4;
         if (difficulty.equals("hard")) {
             codeLength = 5;
         }
         return codeLength;
     }
+
+
 }
