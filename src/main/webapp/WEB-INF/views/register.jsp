@@ -35,6 +35,15 @@
         </tr>
         <tr>
             <td>
+                <ul style="color: cadetblue">
+                    <li>between 3 and 20 characters</li>
+                    <li>only letters and numbers</li>
+                </ul>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
                 Password:
             </td>
             <td>

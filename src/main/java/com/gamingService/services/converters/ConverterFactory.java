@@ -27,6 +27,7 @@ public class ConverterFactory {
                         g.getUser(),
                         ConverterFactory.formatDateToDisplay(g.getUpdated())))
                 .collect(Collectors.toList());
+
     }
 
     private static String formatDateToDisplay(LocalDateTime localDateTime) {
@@ -81,12 +82,28 @@ public class ConverterFactory {
     }
 
     private static String formatSecondsToDisplay(Long seconds) {
-        long min = seconds / 60;
-        long sec = seconds % 60;
-        if (min < 1) {
-            return sec + "sec";
-        } else {
-            return min + " min " + sec + " sec";
+        int durSec = Math.toIntExact(seconds);
+        int min = durSec / 60;
+        int sec = durSec % 60;
+        switch (sec) {
+            case 1: {
+                if (min < 1) {
+                    return "1 second";
+                } else if (min == 1) {
+                    return "1 minute and 1 second";
+                } else {
+                    return min + "minutes and 1 second";
+                }
+            }
+            default: {
+                if (min < 1) {
+                    return sec + " seconds";
+                } else if (min == 1) {
+                    return "1 minute and " + sec + " seconds";
+                } else {
+                    return min + " minutes and " + sec + " seconds";
+                }
+            }
         }
     }
 

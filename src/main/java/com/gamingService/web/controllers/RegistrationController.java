@@ -34,16 +34,6 @@ public class RegistrationController {
         if (result.hasErrors()) {
             return "register";
         }
-        //TODO
-//        boolean usernameFree = userService.isUsernameFree(registrationForm.getUsername());
-//        if (!usernameFree) {
-//            result.rejectValue("username", null, "Nazwa użytkownika jest już zajęta");
-//            return "registration";
-//        }
-        if (!userService.isRepeatPasswordEqual(registrationFormDTO)) {
-            result.rejectValue("password", "passwordsNotEqual");
-            return "register";
-        }
         userService.registerUser(registrationFormDTO);
         return "redirect:/register/successful/" + registrationFormDTO.getUserName();
     }

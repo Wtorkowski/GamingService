@@ -16,6 +16,6 @@ public class MainMenuController {
     @PostMapping
     public String redirectToGamePAge(@RequestParam String difficulty, Model model) {
         model.addAttribute("difficulty", difficulty);
-        return "mastermind";
+        return "mastermind/game";
     }
 }

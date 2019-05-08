@@ -18,7 +18,7 @@
 <c:out value="You have guessed the combination after ${finishedGame.attempts} attempts in ${finishedGame.duration}."/>
 
 
-<table>
+<table style="text-align: center">
     <tr>
         <th>Position</th>
         <th>Name</th>
@@ -38,5 +38,7 @@
         </tr>
     </c:forEach>
 </table>
+
+
 </body>
 </html>

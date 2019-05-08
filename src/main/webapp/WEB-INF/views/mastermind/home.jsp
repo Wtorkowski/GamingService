@@ -44,6 +44,8 @@
                 <label>
                     <input type="radio" name="difficulty" value="hard">
                 </label>Hard<br>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
                 <input type="submit" value="Start game">
             </form>
         </td>

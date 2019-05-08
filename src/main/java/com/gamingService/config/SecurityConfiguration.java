@@ -44,8 +44,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-//        web.ignoring()
-//                .antMatchers("/mastermind/home");
         super.configure(web);
     }
 
@@ -55,15 +53,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/mastermind/home").authenticated()
                 .antMatchers("/main_menu", "/mastermind/**").authenticated()
                 .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
-                .antMatchers("/home", "/register", "/register/**").anonymous()
+                .antMatchers("/login", "/register", "/register/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
+                .formLogin().loginPage("/login")
                 .defaultSuccessUrl("/main_menu")
                 .and()
                 .logout()
-                .logoutSuccessUrl("/home")
-                .and()
-                .csrf().disable();
+                .logoutSuccessUrl("/login");
     }
 }

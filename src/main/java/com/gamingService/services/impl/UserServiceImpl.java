@@ -1,6 +1,5 @@
 package com.gamingService.services.impl;
 
-import com.gamingService.core.components.LoggedUser;
 import com.gamingService.domain.model.User;
 import com.gamingService.domain.repositories.UserRepository;
 import com.gamingService.dto.RegistrationFormDTO;
@@ -14,18 +13,6 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
-    private LoggedUser loggedUser;
-
-//    @Override
-//    public User currentUserEntity() {
-//        String userNameDTO = loggedUser.value().getUserName();
-//        return userRepository.findByUserName(userNameDTO);
-//    }
-
-//    @Override
-//    public UserDTO getLoggedUser() {
-//       return null;
-//    }
 
     @Override
     public void registerUser(RegistrationFormDTO registrationFormDTO) {
@@ -34,8 +21,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isRepeatPasswordEqual(RegistrationFormDTO registrationFormDTO) {
-        return registrationFormDTO.getPassword().equals(registrationFormDTO.getRepeatPassword());
-    }
+    public boolean userExistsInDb(String username) {
 
+        return false;
+    }
 }
