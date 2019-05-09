@@ -51,7 +51,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/mastermind/home").authenticated()
-                .antMatchers("/main_menu", "/mastermind/**").authenticated()
+                .antMatchers(
+                        "/main_menu",
+                        "/mastermind/**",
+                        "/stats"
+                        ).authenticated()
                 .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
                 .antMatchers("/login", "/register", "/register/**").permitAll()
                 .anyRequest().authenticated()

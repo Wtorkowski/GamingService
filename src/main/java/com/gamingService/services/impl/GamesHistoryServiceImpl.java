@@ -5,7 +5,8 @@ import com.gamingService.domain.model.GamesHistory;
 import com.gamingService.domain.model.MastermindAttempts;
 import com.gamingService.domain.repositories.GamesHistoryRepository;
 import com.gamingService.domain.repositories.MastermindAttemptsRepository;
-import com.gamingService.dto.MastermindLastGameHistoryDTO;
+import com.gamingService.dto.MastermindGameHistoryDTO;
+import com.gamingService.dto.MastermindStatsDTO;
 import com.gamingService.dto.MastermindTopScoresDTO;
 import com.gamingService.services.GamesHistoryService;
 import com.gamingService.services.converters.ConverterFactory;
@@ -13,6 +14,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -24,6 +26,7 @@ public class GamesHistoryServiceImpl implements GamesHistoryService {
     private GamesHistoryRepository gamesHistoryRepository;
     private MastermindAttemptsRepository mastermindAttemptsRepository;
     private LoggedUser loggedUser;
+
 
     @Override
     public void createMastermindGameHistory(String difficulty) {
@@ -48,12 +51,11 @@ public class GamesHistoryServiceImpl implements GamesHistoryService {
         int attempts = mastermindAttemptsRepository.countMastermindAttemptsByUserIdIs(loggedUser.value().getId());
         long duration = gameDuration();
         GamesHistory currentEntity = gamesHistoryRepository.
-                findDistinctFirstByUserIdIsOrderByCreatedDesc(loggedUser.value().getId());
+                findLastGameByUser(loggedUser.value().getId());
         GamesHistory readyToSave = ConverterFactory.updateFinishedMastermind(currentEntity, attempts, duration);
         gamesHistoryRepository.save(readyToSave);
         return readyToSave;
     }
-
 
     private Long gameDuration() {
         MastermindAttempts startEntity = mastermindAttemptsRepository.findFirstByUserIdIs(loggedUser.value().getId());
@@ -66,18 +68,52 @@ public class GamesHistoryServiceImpl implements GamesHistoryService {
     @Override
     public List<MastermindTopScoresDTO> getTopScoresList(String difficulty) {
         List<GamesHistory> topScores = gamesHistoryRepository.
-                findTop10ByGameNameIsAndDifficultyIsOrderByAttemptsAscDurationAsc("mastermind", difficulty);
+                topTenMastermindScores(difficulty);
         return ConverterFactory.mastermindTopScoreConverter(topScores);
     }
 
     @Override
-    public void saveFinishedGame(GamesHistory gamesHistory) {
-        gamesHistoryRepository.save(gamesHistory);
+    public MastermindGameHistoryDTO getLastMastermindGameHistoryDTO(GamesHistory gamesHistory) {
+        return ConverterFactory.fromGameHistoryToDTO(gamesHistory);
     }
 
     @Override
-    public MastermindLastGameHistoryDTO getLastMastermindGameHistoryDTO(GamesHistory gamesHistory) {
-        return ConverterFactory.fromGameHistoryToGameOverResources(gamesHistory);
+    public MastermindStatsDTO getStatsToDisplay() {
+        long userId = loggedUser.value().getId();
+        String easy = "easy";
+        String medium = "medium";
+        String hard = "hard";
+        int sumOfGames = gamesHistoryRepository.sumOfUserGames(userId);
+        int sumOfAttempts = gamesHistoryRepository.sumAllUserAttempts(userId);
+        long totalDuration = gamesHistoryRepository.getTotalDuration(userId);
+
+        List<MastermindGameHistoryDTO> topScores = new ArrayList<>();
+        if (setExistingMastermindTopScore(easy) != null) {
+            topScores.add(setExistingMastermindTopScore(easy));
+        }
+        if (setExistingMastermindTopScore(medium) != null) {
+            topScores.add(setExistingMastermindTopScore(medium));
+        }
+        if (setExistingMastermindTopScore(hard) != null) {
+            topScores.add(setExistingMastermindTopScore(hard));
+        }
+
+        return MastermindStatsDTO.builder()
+                .userName(loggedUser.value().getUserName())
+                .gamesTotal(sumOfGames)
+                .averageAttempts(ConverterFactory.formatDoubleToTwoDecimal((double) sumOfAttempts / (double) sumOfGames))
+                .durationTotal(ConverterFactory.formatSecondsToDisplay(totalDuration))
+                .averageDuration(ConverterFactory.formatSecondsToDisplay(totalDuration / sumOfGames))
+                .topScores(topScores)
+                .build();
+    }
+
+    private MastermindGameHistoryDTO setExistingMastermindTopScore(String difficulty) {
+        long userId = loggedUser.value().getId();
+        if (gamesHistoryRepository.isTopScoreAvailable(userId, difficulty)) {
+            return ConverterFactory.fromGameHistoryToDTO(gamesHistoryRepository.topMastermindScore(userId, difficulty));
+        }
+        return null;
     }
 
     @Override
@@ -107,5 +143,4 @@ public class GamesHistoryServiceImpl implements GamesHistoryService {
         }
         return codeLength;
     }
-
 }

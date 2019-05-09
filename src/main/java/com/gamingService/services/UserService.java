@@ -6,5 +6,4 @@ public interface UserService {
 
     void registerUser(RegistrationFormDTO registrationFormDTO);
 
-    boolean userExistsInDb(String username);
 }

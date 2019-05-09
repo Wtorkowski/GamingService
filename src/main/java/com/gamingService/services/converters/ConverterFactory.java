@@ -4,15 +4,17 @@ import com.gamingService.domain.model.Decription;
 import com.gamingService.domain.model.GamesHistory;
 import com.gamingService.domain.model.MastermindAttempts;
 import com.gamingService.domain.model.User;
-import com.gamingService.dto.MastermindLastGameHistoryDTO;
+import com.gamingService.dto.MastermindGameHistoryDTO;
 import com.gamingService.dto.MastermindTopScoresDTO;
 import com.gamingService.dto.RegistrationFormDTO;
 import com.gamingService.dto.UserDTO;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +29,6 @@ public class ConverterFactory {
                         g.getUser(),
                         ConverterFactory.formatDateToDisplay(g.getUpdated())))
                 .collect(Collectors.toList());
-
     }
 
     private static String formatDateToDisplay(LocalDateTime localDateTime) {
@@ -81,34 +82,39 @@ public class ConverterFactory {
         return gamesHistory;
     }
 
-    private static String formatSecondsToDisplay(Long seconds) {
-        int durSec = Math.toIntExact(seconds);
-        int min = durSec / 60;
-        int sec = durSec % 60;
-        switch (sec) {
+    public static String formatSecondsToDisplay(long duration) {
+        int totalTime = (int) duration;
+        List<String> toDisplay = new ArrayList<>();
+        int secInDay = 86400;
+        int secInHour = 3600;
+        int secInMinute = 60;
+        int days = totalTime / secInDay;
+        int hours = (totalTime % secInDay) / secInHour;
+        int minutes = ((totalTime % secInDay) % secInHour) / secInMinute;
+        int seconds = ((totalTime % secInDay) % secInHour) % secInMinute;
+        toDisplay.add(timePeriodToString(days, "day"));
+        toDisplay.add(timePeriodToString(hours, "hour"));
+        toDisplay.add(timePeriodToString(minutes, "minute"));
+        toDisplay.add(timePeriodToString(seconds, "second"));
+        return String.join("", toDisplay);
+    }
+
+    private static String timePeriodToString(int timePeriod, String nameOfPeriod) {
+        switch (timePeriod) {
+            case 0: {
+                return "";
+            }
             case 1: {
-                if (min < 1) {
-                    return "1 second";
-                } else if (min == 1) {
-                    return "1 minute and 1 second";
-                } else {
-                    return min + "minutes and 1 second";
-                }
+                return timePeriod + " " + nameOfPeriod + " ";
             }
             default: {
-                if (min < 1) {
-                    return sec + " seconds";
-                } else if (min == 1) {
-                    return "1 minute and " + sec + " seconds";
-                } else {
-                    return min + " minutes and " + sec + " seconds";
-                }
+                return timePeriod + " " + nameOfPeriod + "s ";
             }
         }
     }
 
-    public static MastermindLastGameHistoryDTO fromGameHistoryToGameOverResources(GamesHistory gamesHistory) {
-        MastermindLastGameHistoryDTO finishedGame = new MastermindLastGameHistoryDTO();
+    public static MastermindGameHistoryDTO fromGameHistoryToDTO(GamesHistory gamesHistory) {
+        MastermindGameHistoryDTO finishedGame = new MastermindGameHistoryDTO();
         finishedGame.setAttempts(gamesHistory.getAttempts());
         finishedGame.setDifficulty(gamesHistory.getDifficulty());
         finishedGame.setDuration(ConverterFactory.formatSecondsToDisplay(gamesHistory.getDuration()));
@@ -117,4 +123,10 @@ public class ConverterFactory {
         finishedGame.setUser(gamesHistory.getUser());
         return finishedGame;
     }
+
+    public static String formatDoubleToTwoDecimal(double num) {
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        return decimalFormat.format(num);
+    }
+
 }

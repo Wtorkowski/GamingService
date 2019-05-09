@@ -19,10 +19,4 @@ public class UserServiceImpl implements UserService {
         User userToRegister = ConverterFactory.fromResourceToUser(registrationFormDTO);
         userRepository.save(userToRegister);
     }
-
-    @Override
-    public boolean userExistsInDb(String username) {
-
-        return false;
-    }
 }

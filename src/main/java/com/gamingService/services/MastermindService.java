@@ -10,8 +10,6 @@ public interface MastermindService {
 
     boolean isDecriptionInputPatternCorrect(String difficulty, Decription decriptionAttemptsDTO);
 
-
-
     String generateFeedback(Decription decriptionDTO, String difficulty);
 
     void saveAttempt(Decription decription,String difficulty);

@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: bart
@@ -16,5 +17,43 @@
 </head>
 <body>
 
+<table>
+    <tr>
+        <th colspan="2"><c:out value="Your Mastermind statistics:"/></th>
+    </tr>
+    <tr>
+        <td><c:out value="Total number of games finished:"/></td>
+        <td> ${statistics.gamesTotal}</td>
+    </tr>
+    <tr>
+        <td><c:out value="Total time played:"/></td>
+        <td> ${statistics.durationTotal}</td>
+    </tr>
+    <tr>
+        <td><c:out value="Average attempts per game:"/></td>
+        <td> ${statistics.averageAttempts}</td>
+    </tr>
+    <tr>
+        <td><c:out value="Average game duration:"/></td>
+        <td> ${statistics.averageDuration}</td>
+    </tr>
+    <c:forEach items="${statistics.topScores}" var="gh">
+        <tr>
+            <th colspan="2"><c:out value="Top score for ${gh.difficulty} difficulty:"/></th>
+        </tr>
+        <tr>
+            <td><c:out value="Number of attempts:"/></td>
+            <td>${gh.attempts}</td>
+        </tr>
+        <tr>
+            <td><c:out value="Duration:"/></td>
+            <td>${gh.duration}</td>
+        </tr>
+        <tr>
+            <td><c:out value="Finished on:"/></td>
+            <td>${gh.updated}</td>
+        </tr>
+    </c:forEach>
+</table>
 </body>
 </html>

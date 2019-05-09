@@ -20,7 +20,6 @@ public class MastermindServiceImpl implements MastermindService {
     private GamesHistoryRepository gamesHistoryRepository;
     private LoggedUser loggedUser;
 
-
     @Override
     public List<MastermindAttempts> findAllAttemptsByUserId() {
         return mastermindAttemptsRepository.findAllByUserIdIsOrderByCreated(loggedUser.value().getId());
@@ -30,7 +29,6 @@ public class MastermindServiceImpl implements MastermindService {
     public void clearAttemptsTable() {
         mastermindAttemptsRepository.deleteMastermindAttemptsByUserIdIs(loggedUser.value().getId());
     }
-
 
     @Override
     public boolean isCombinationDecrypted(Decription decriptionDTO, String difficulty) {
@@ -68,7 +66,6 @@ public class MastermindServiceImpl implements MastermindService {
         }
     }
 
-
     @Override
     public String generateFeedback(Decription decription, String difficulty) {
         String encryptedCode = gamesHistoryRepository.getEncryptedCode(loggedUser.value().getId(), difficulty);
@@ -97,7 +94,7 @@ public class MastermindServiceImpl implements MastermindService {
         //Checks for non matching digits
         for (int k = 0; k < codeLength; k++) {
             if (encrypted.charAt(k) != 'X' && encrypted.charAt(k) != 'O') {
-                feedback.append("[ ]");
+                feedback.append("[_]");
             }
         }
         return feedback.toString();
@@ -110,6 +107,4 @@ public class MastermindServiceImpl implements MastermindService {
         }
         return codeLength;
     }
-
-
 }

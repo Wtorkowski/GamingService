@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-public class MastermindLastGameHistoryDTO {
+public class MastermindGameHistoryDTO {
     private User user;
     private String updated;
     private int attempts;

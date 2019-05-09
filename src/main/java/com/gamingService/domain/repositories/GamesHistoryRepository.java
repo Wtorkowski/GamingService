@@ -13,11 +13,43 @@ public interface GamesHistoryRepository extends JpaRepository<GamesHistory, Long
     @Transactional
     void deleteAllByUserIdIsAndAttemptsIs(long userId, int attempts);
 
-    @Query(value = "SELECT g.encrypted FROM GamesHistory g WHERE user.id=?1 AND difficulty =?2 AND gameName LIKE 'mastermind' AND attempts=0")
-    String getEncryptedCode(long userId, String difficulty);
 
     GamesHistory findDistinctFirstByUserIdIsOrderByCreatedDesc(long userId);
 
+    default GamesHistory findLastGameByUser(long userId) {
+        return findDistinctFirstByUserIdIsOrderByCreatedDesc(userId);
+    }
+
+
     List<GamesHistory> findTop10ByGameNameIsAndDifficultyIsOrderByAttemptsAscDurationAsc(String gameName, String difficulty);
+
+    default List<GamesHistory> topTenMastermindScores(String difficulty) {
+        return findTop10ByGameNameIsAndDifficultyIsOrderByAttemptsAscDurationAsc("mastermind", difficulty);
+    }
+
+
+    GamesHistory findTopByUserIdIsAndGameNameIsAndDifficultyIsOrderByAttemptsAscDurationAsc(long userID, String gameName, String difficulty);
+
+    default GamesHistory topMastermindScore(long userId, String difficulty) {
+        return findTopByUserIdIsAndGameNameIsAndDifficultyIsOrderByAttemptsAscDurationAsc(userId, "mastermind", difficulty);
+    }
+
+
+    @Query(value = "SELECT g.encrypted FROM GamesHistory g WHERE user.id=?1 AND difficulty =?2 AND gameName LIKE 'mastermind' AND attempts=0")
+    String getEncryptedCode(long userId, String difficulty);
+
+    @Query("SELECT COUNT (g) FROM GamesHistory g WHERE user.id=?1")
+    int sumOfUserGames(Long userId);
+
+    @Query("SELECT SUM (g.attempts) FROM GamesHistory g WHERE user.id=?1")
+    int sumAllUserAttempts(Long userId);
+
+    @Query("SELECT SUM (g.duration) FROM GamesHistory g WHERE user.id=?1")
+    long getTotalDuration(Long userId);
+
+    @Query("SELECT CASE WHEN COUNT (g)>0 THEN TRUE ELSE FALSE END" +
+            " FROM GamesHistory g WHERE user.id=?1 AND gameName LIKE 'mastermind' AND g.difficulty=?2 AND attempts>0")
+    boolean isTopScoreAvailable(long userId, String difficulty);
+
 
 }

@@ -39,6 +39,6 @@
     </c:forEach>
 </table>
 
-
+<button onclick=window.location.href="/mastermind/home">Return to Mastermind menu</button>
 </body>
 </html>
