@@ -41,15 +41,17 @@ public interface GamesHistoryRepository extends JpaRepository<GamesHistory, Long
     @Query("SELECT COUNT (g) FROM GamesHistory g WHERE user.id=?1")
     int sumOfUserGames(Long userId);
 
-    @Query("SELECT SUM (g.attempts) FROM GamesHistory g WHERE user.id=?1")
+    @Query("SELECT CASE WHEN SUM (g.attempts)=NULL THEN 0 ELSE SUM (g.attempts) END FROM GamesHistory g WHERE user.id=?1 AND attempts>0")
     int sumAllUserAttempts(Long userId);
 
-    @Query("SELECT SUM (g.duration) FROM GamesHistory g WHERE user.id=?1")
+    @Query("SELECT CASE WHEN SUM (g.duration)=NULL THEN 0 ELSE SUM (g.duration) END FROM GamesHistory g WHERE user.id=?1 AND duration>0")
     long getTotalDuration(Long userId);
 
     @Query("SELECT CASE WHEN COUNT (g)>0 THEN TRUE ELSE FALSE END" +
             " FROM GamesHistory g WHERE user.id=?1 AND gameName LIKE 'mastermind' AND g.difficulty=?2 AND attempts>0")
     boolean isTopScoreAvailable(long userId, String difficulty);
 
-
+    @Query("SELECT CASE WHEN COUNT (g)>0 THEN TRUE ELSE FALSE END" +
+            " FROM GamesHistory g WHERE user.id=?1 AND attempts>0 AND gameName LIKE 'mastermind'")
+    boolean anyFinishedGameExists(long userId);
 }

@@ -8,7 +8,6 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.Objects;
 public class RepeatPasswordValidator implements ConstraintValidator<RepeatPassword,RegistrationFormDTO> {
 
-
     @Override
     public void initialize(RepeatPassword constraintAnnotation) {
 
@@ -18,6 +17,4 @@ public class RepeatPasswordValidator implements ConstraintValidator<RepeatPasswo
     public boolean isValid(RegistrationFormDTO registrationFormDTO , ConstraintValidatorContext context) {
         return Objects.equals(registrationFormDTO.getPassword(), registrationFormDTO.getRepeatPassword());
     }
-
-
 }

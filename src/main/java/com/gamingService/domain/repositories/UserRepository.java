@@ -10,6 +10,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT CASE WHEN COUNT (u)=0 THEN TRUE ELSE FALSE END FROM User u WHERE u.userName=?1")
     boolean isUsernameAvailable(String userName);
+
+    @Query("SELECT u.password FROM User u WHERE id=?1")
+    String getLoggedUserPassword(Long id);
 }
 
 

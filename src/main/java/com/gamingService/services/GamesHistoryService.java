@@ -32,4 +32,6 @@ public interface GamesHistoryService {
 //    String getTotalTimePlayed();
 
     MastermindStatsDTO getStatsToDisplay();
+
+    boolean isAnyGameFinished();
 }

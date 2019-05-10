@@ -28,6 +28,9 @@ public class User extends AbstractEntity {
     @OneToMany(cascade = CascadeType.ALL)
     private List<MastermindAttempts> mastermindAttempts;
 
+    @ManyToMany
+    private List<Achievement> achievementsList;
+
     public User() {
     }
 

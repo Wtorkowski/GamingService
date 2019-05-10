@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: bart
@@ -17,9 +18,9 @@
 <body>
 
 <table style="text-align: center">
-    <h1>Main Menu</h1>
+
     <tr>
-        <td colspan="3"><br></td>
+        <td colspan="3"><h1>Main Menu</h1></td>
     </tr>
     <td>
         <button onclick=window.location.href="/mastermind/home">Mastermind</button>
@@ -27,11 +28,21 @@
     <tr>
         <td colspan="3"><br></td>
     </tr>
+
     <tr>
         <td colspan="3">
-            <button onclick=window.location.href="/stats">Stats</button>
+            <button
+                    <c:if test="${isAnyGameHistory==false}">disabled</c:if> onclick=window.location.href="/stats">Stats
+            </button>
         </td>
     </tr>
+    <c:if test="${isAnyGameHistory==false}">
+        <tr>
+            <td colspan="3">
+                Finish one game to unlock stats
+            </td>
+        </tr>
+    </c:if>
     <tr>
         <td colspan="3">
             <button onclick=window.location.href="/achievements">Achievements</button>

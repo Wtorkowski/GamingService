@@ -30,7 +30,7 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String processRegistrationPage(@Valid @ModelAttribute("registrationForm") RegistrationFormDTO registrationFormDTO, BindingResult result, Model model) {
+    public String processRegistrationPage(@Valid @ModelAttribute("registrationForm") RegistrationFormDTO registrationFormDTO, BindingResult result) {
         if (result.hasErrors()) {
             return "register";
         }

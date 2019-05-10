@@ -41,17 +41,7 @@
     </tr>
     <tr>
         <td colspan="2">
-            <c:choose>
-                <c:when test="${difficulty == 'easy'}">
-                    Decrypt hidden combination of 4 digits, use digits from 1 to 4.
-                </c:when>
-                <c:when test="${difficulty == 'medium'}">
-                    Decrypt hidden combination of 4 digits, use digits from 1 to 6.
-                </c:when>
-                <c:when test="${difficulty == 'hard'}">
-                    Decrypt hidden combination of 5 digits, use digits from 1 to 6.
-                </c:when>
-            </c:choose>
+
         </td>
     </tr>
     <tr>
@@ -99,18 +89,34 @@
             <td>
                 <c:choose>
                     <c:when test="${difficulty == 'easy'}">
-                        <form:input path="decription" pattern="[1-4]{4,4}"/>
-                        <input type="submit" value="Submit"> </c:when>
+                        <form:input path="decription" pattern="[1-4]{4,4}" autofocus="autofocus" onfocus="this.value=''"/></c:when>
                     <c:when test="${difficulty == 'medium'}">
-                        <form:input path="decription" pattern="[1-6]{4,4}"/>
-                        <input type="submit" value="Submit"> </c:when>
+                        <form:input path="decription" pattern="[1-6]{4,4}" autofocus="autofocus" onfocus="this.value=''"/></c:when>
                     <c:when test="${difficulty == 'hard'}">
-                        <form:input path="decription" pattern="[1-6]{5,5}"/>
-                        <input type="submit" value="Submit"> </c:when>
+                        <form:input path="decription" pattern="[1-6]{5,5}" autofocus="autofocus" onfocus="this.value=''"/></c:when>
                 </c:choose>
             </td>
+            <td> <input type="submit" value="Submit"></td>
         </form:form>
     </tr>
+    <tr>
+        <td> </td>
+        <td>
+            <c:choose>
+                <c:when test="${difficulty == 'easy'}">
+                   Use 4 digits from 1 to 4.
+                </c:when>
+                <c:when test="${difficulty == 'medium'}">
+                    Use 4 digits, from 1 to 6.
+                </c:when>
+                <c:when test="${difficulty == 'hard'}">
+                    Use 5 digits, from 1 to 6.
+                </c:when>
+            </c:choose>
+        </td>
+    </tr>
+
+    <%--TODO Delete {encrypted}--%>
     <tr>
         <td>${encrypted}</td>
     </tr>

@@ -4,10 +4,7 @@ import com.gamingService.domain.model.Decription;
 import com.gamingService.domain.model.GamesHistory;
 import com.gamingService.domain.model.MastermindAttempts;
 import com.gamingService.domain.model.User;
-import com.gamingService.dto.MastermindGameHistoryDTO;
-import com.gamingService.dto.MastermindTopScoresDTO;
-import com.gamingService.dto.RegistrationFormDTO;
-import com.gamingService.dto.UserDTO;
+import com.gamingService.dto.*;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -41,7 +38,6 @@ public class ConverterFactory {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
         userDTO.setUserName(user.getUserName());
-        userDTO.setPassword(user.getPassword());
         return userDTO;
     }
 
@@ -53,6 +49,13 @@ public class ConverterFactory {
         attempt.setFeedback(feedback);
         attempt.setUser(user);
         return attempt;
+    }
+
+    public static User updatePassword(String password, User user) {
+        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(password));
+        user.beforeUpdate();
+        return user;
     }
 
     public static User fromResourceToUser(RegistrationFormDTO registrationFormDTO) {

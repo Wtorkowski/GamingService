@@ -16,10 +16,13 @@ public class StatsController {
 
     @GetMapping()
     String generateStatisticPage(Model model) {
-        model.addAttribute("statistics",gamesHistoryService.getStatsToDisplay());
-//        model.addAttribute("games_total", gamesHistoryService.getSumAllUserGames());
-//        model.addAttribute("duration_total",gamesHistoryService.getTotalTimePlayed());
-//        model.addAttribute("average_attempts",gamesHistoryService.getAverageAttempts());
+        if (gamesHistoryService.isAnyGameFinished()) {
+            model.addAttribute("statistics", gamesHistoryService.getStatsToDisplay());
+            model.addAttribute("isAnyGameFinished", true);
+
+        } else {
+            model.addAttribute("isAnyGameFinished", false);
+        }
         return "stats";
     }
 }

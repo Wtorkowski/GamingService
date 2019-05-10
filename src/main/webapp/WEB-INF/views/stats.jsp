@@ -16,44 +16,49 @@
     </style>
 </head>
 <body>
-
-<table>
-    <tr>
-        <th colspan="2"><c:out value="Your Mastermind statistics:"/></th>
-    </tr>
-    <tr>
-        <td><c:out value="Total number of games finished:"/></td>
-        <td> ${statistics.gamesTotal}</td>
-    </tr>
-    <tr>
-        <td><c:out value="Total time played:"/></td>
-        <td> ${statistics.durationTotal}</td>
-    </tr>
-    <tr>
-        <td><c:out value="Average attempts per game:"/></td>
-        <td> ${statistics.averageAttempts}</td>
-    </tr>
-    <tr>
-        <td><c:out value="Average game duration:"/></td>
-        <td> ${statistics.averageDuration}</td>
-    </tr>
-    <c:forEach items="${statistics.topScores}" var="gh">
+<c:if test="${isAnyGameFinished==false}">Finish at least one game to check your stats.</c:if>
+<c:if test="${isAnyGameFinished==true}">
+    <table>
         <tr>
-            <th colspan="2"><c:out value="Top score for ${gh.difficulty} difficulty:"/></th>
+            <th colspan="2"><c:out value="Your Mastermind statistics:"/></th>
         </tr>
         <tr>
-            <td><c:out value="Number of attempts:"/></td>
-            <td>${gh.attempts}</td>
+            <td><c:out value="Total number of games finished:"/></td>
+            <td> ${statistics.gamesTotal}</td>
         </tr>
         <tr>
-            <td><c:out value="Duration:"/></td>
-            <td>${gh.duration}</td>
+            <td><c:out value="Total time played:"/></td>
+            <td> ${statistics.durationTotal}</td>
         </tr>
         <tr>
-            <td><c:out value="Finished on:"/></td>
-            <td>${gh.updated}</td>
+            <td><c:out value="Average attempts per game:"/></td>
+            <td> ${statistics.averageAttempts}</td>
         </tr>
-    </c:forEach>
-</table>
+        <tr>
+            <td><c:out value="Average game duration:"/></td>
+            <td> ${statistics.averageDuration}</td>
+        </tr>
+        <c:forEach items="${statistics.topScores}" var="gh">
+            <tr>
+                <th colspan="2"><c:out value="Top score for ${gh.difficulty} difficulty:"/></th>
+            </tr>
+            <tr>
+                <td><c:out value="Number of attempts:"/></td>
+                <td>${gh.attempts}</td>
+            </tr>
+            <tr>
+                <td><c:out value="Duration:"/></td>
+                <td>${gh.duration}</td>
+            </tr>
+            <tr>
+                <td><c:out value="Finished on:"/></td>
+                <td>${gh.updated}</td>
+            </tr>
+        </c:forEach>
+    </table>
+</c:if>
+<br>
+<br>
+<button onclick=window.location.href="/main_menu">Return to Main menu</button>
 </body>
 </html>

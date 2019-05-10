@@ -12,9 +12,9 @@
     <title>Mastermind game over</title>
 </head>
 <body>
-<h1>Congratulation ${finishedGame.user.userName} !</h1>
+<h1>Congratulations ${finishedGame.user.userName} !</h1>
 
-<c:out value="The correct combination was:${finishedGame.encrypted}."/><br>
+<c:out value="The correct combination is: ${finishedGame.encrypted}."/><br>
 <c:out value="You have guessed the combination after ${finishedGame.attempts} attempts in ${finishedGame.duration}."/>
 
 

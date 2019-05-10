@@ -54,16 +54,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/main_menu",
                         "/mastermind/**",
-                        "/stats"
-                        ).authenticated()
+                        "/stats",
+                        "/account_settings")
+                        .authenticated()
                 .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
-                .antMatchers("/login", "/register", "/register/**").permitAll()
+                .antMatchers("/login","/login/**", "/register", "/register/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login")
-                .defaultSuccessUrl("/main_menu")
+                    .formLogin().loginPage("/login")
+                    .defaultSuccessUrl("/main_menu")
                 .and()
-                .logout()
-                .logoutSuccessUrl("/login");
+                    .logout()
+                    .logoutSuccessUrl("/login");
     }
 }

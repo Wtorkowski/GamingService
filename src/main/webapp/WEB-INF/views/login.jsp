@@ -35,16 +35,27 @@
         </tr>
         <tr>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
-            <td colspan='2'><input name="submit" type="submit" value="Sign in"/></td>
+            <td colspan='2' style="text-align: right"><input name="submit" type="submit" value="Sign in"/></td>
         </tr>
     </table>
-
 </form>
-
-Not registered yet?
-<button onclick=window.location.href="register">Join now</button>
-
+<table>
+    <tr>
+        <td>Forgot password?</td>
+        <td>
+            <button onclick=window.location.href="login/forgotten_password">Lost password</button>
+        </td>
+    </tr>
+     <tr>
+        <td> </td>
+        <td> </td>
+    </tr>
+    <tr>
+        <td>Not registered yet?</td>
+        <td>
+            <button onclick=window.location.href="register">Join now</button>
+        </td>
+    </tr>
 </table>
 </body>
 </html>
