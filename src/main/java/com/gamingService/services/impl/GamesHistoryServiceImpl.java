@@ -84,17 +84,12 @@ public class GamesHistoryServiceImpl implements GamesHistoryService {
     @Override
     public MastermindStatsDTO getStatsToDisplay() {
         long userId = loggedUser.value().getId();
-        String easy = "easy";
-        String medium = "medium";
-        String hard = "hard";
         int sumOfGames = gamesHistoryRepository.sumOfUserGames(userId);
         int sumOfAttempts = gamesHistoryRepository.sumAllUserAttempts(userId);
         long totalDuration = gamesHistoryRepository.getTotalDuration(userId);
         String avgAttempts = averageAttempts(sumOfGames, sumOfAttempts);
         String avgDuration = averageDuration(sumOfGames, totalDuration);
-
-        List<MastermindGameHistoryDTO> topScores = getMastermindGameHistoryDTOS(easy, medium, hard);
-
+        List<MastermindGameHistoryDTO> topScores = getMastermindDifficultyTop();
         return MastermindStatsDTO.builder()
                 .userName(loggedUser.value().getUserName())
                 .gamesTotal(sumOfGames)
@@ -107,34 +102,35 @@ public class GamesHistoryServiceImpl implements GamesHistoryService {
 
 
     private String averageDuration(int sumOfGames, long totalDuration) {
-        String avgDuration = "";
         if (sumOfGames == 0 || totalDuration == 0) {
-            avgDuration = "0";
+            return "0";
         } else {
-            ConverterFactory.formatSecondsToDisplay(totalDuration / sumOfGames);
+            int avg = (int) ((double) totalDuration / (double) sumOfGames) / 1;
+            return ConverterFactory.formatSecondsToDisplay(avg);
         }
-        return avgDuration;
     }
 
     private String averageAttempts(int sumOfGames, int sumOfAttempts) {
-        String averageAttempts = "";
         if (sumOfGames == 0 || sumOfAttempts == 0) {
-            averageAttempts = "0";
+            return "0";
         } else {
-            ConverterFactory.formatDoubleToTwoDecimal((double) sumOfAttempts / (double) sumOfGames);
+            return ConverterFactory.formatDoubleToTwoDecimal((double) sumOfAttempts / (double) sumOfGames);
         }
-        return averageAttempts;
     }
 
-    private List<MastermindGameHistoryDTO> getMastermindGameHistoryDTOS(String easy, String medium, String hard) {
+    private List<MastermindGameHistoryDTO> getMastermindDifficultyTop() {
+        long userId = loggedUser.value().getId();
+        String easy = "easy";
+        String medium = "medium";
+        String hard = "hard";
         List<MastermindGameHistoryDTO> topScores = new ArrayList<>();
-        if (setExistingMastermindTopScore(easy) != null) {
+        if (gamesHistoryRepository.isTopScoreAvailable(userId, easy)) {
             topScores.add(setExistingMastermindTopScore(easy));
         }
-        if (setExistingMastermindTopScore(medium) != null) {
+        if (gamesHistoryRepository.isTopScoreAvailable(userId, medium)) {
             topScores.add(setExistingMastermindTopScore(medium));
         }
-        if (setExistingMastermindTopScore(hard) != null) {
+        if (gamesHistoryRepository.isTopScoreAvailable(userId, hard)) {
             topScores.add(setExistingMastermindTopScore(hard));
         }
         return topScores;

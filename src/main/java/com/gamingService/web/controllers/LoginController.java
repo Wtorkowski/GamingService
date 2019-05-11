@@ -40,6 +40,6 @@ public class LoginController {
 
     @GetMapping("/login/forgotten_password")
     public String forgottenPasswordHandler() {
-        return "lost_password";
+        return "password_recovery";
     }
 }

@@ -28,10 +28,10 @@ public interface GamesHistoryRepository extends JpaRepository<GamesHistory, Long
     }
 
 
-    GamesHistory findTopByUserIdIsAndGameNameIsAndDifficultyIsOrderByAttemptsAscDurationAsc(long userID, String gameName, String difficulty);
+    GamesHistory findTopByUserIdIsAndGameNameIsAndDifficultyIsAndUpdatedNotNullOrderByAttemptsAscDurationAsc(long userID, String gameName, String difficulty);
 
     default GamesHistory topMastermindScore(long userId, String difficulty) {
-        return findTopByUserIdIsAndGameNameIsAndDifficultyIsOrderByAttemptsAscDurationAsc(userId, "mastermind", difficulty);
+        return findTopByUserIdIsAndGameNameIsAndDifficultyIsAndUpdatedNotNullOrderByAttemptsAscDurationAsc(userId, "mastermind", difficulty);
     }
 
 

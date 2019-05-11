@@ -10,56 +10,40 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <jsp:include page="fragments/header-link.jsp"/>
     <title>Main Menu</title>
     <style>
 
     </style>
 </head>
 <body>
-
-<table style="text-align: center">
-
-    <tr>
-        <td colspan="3"><h1>Main Menu</h1></td>
-    </tr>
-    <td>
+<jsp:include page="fragments/logged_user.jsp"/>
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4" align="center">
+        <h1>Games</h1>
         <button onclick=window.location.href="/mastermind/home">Mastermind</button>
-    </td>
-    <tr>
-        <td colspan="3"><br></td>
-    </tr>
+        <br>
+        <br>
+        <br>
 
-    <tr>
-        <td colspan="3">
-            <button
-                    <c:if test="${isAnyGameHistory==false}">disabled</c:if> onclick=window.location.href="/stats">Stats
-            </button>
-        </td>
-    </tr>
-    <c:if test="${isAnyGameHistory==false}">
-        <tr>
-            <td colspan="3">
-                Finish one game to unlock stats
-            </td>
-        </tr>
-    </c:if>
-    <tr>
-        <td colspan="3">
-            <button onclick=window.location.href="/achievements">Achievements</button>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="3">
-            <button onclick=window.location.href="/account_settings">Account settings</button>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="3">
-            <button onclick=window.location.href="/logout">Logout</button>
-        </td>
-    </tr>
-</table>
-
-
+        <h3>Options</h3>
+        <c:if test="${isAnyGameHistory==false}">
+            <p style="color: dimgrey"><c:out value="Finish one game to unlock stats"/></p>
+        </c:if>
+        <button
+                <c:if test="${isAnyGameHistory==false}">disabled</c:if>
+                onclick=window.location.href="/stats">Stats
+        </button>
+        <br>
+        <br>
+        <button onclick=window.location.href="/achievements">Achievements</button>
+        <br>
+        <br>
+        <button onclick=window.location.href="/account_settings">Account settings</button>
+        <br>
+    </div>
+    <div class="col-4"></div>
+</div>
 </body>
 </html>

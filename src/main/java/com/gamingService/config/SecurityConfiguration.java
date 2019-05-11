@@ -44,6 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/img/**");
         super.configure(web);
     }
 
@@ -56,15 +57,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/mastermind/**",
                         "/stats",
                         "/account_settings")
-                        .authenticated()
+                .authenticated()
                 .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
-                .antMatchers("/login","/login/**", "/register", "/register/**").permitAll()
+                .antMatchers("/login", "/login/**", "/register", "/register/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                    .formLogin().loginPage("/login")
-                    .defaultSuccessUrl("/main_menu")
+                .formLogin().loginPage("/login")
+                .defaultSuccessUrl("/main_menu")
                 .and()
-                    .logout()
-                    .logoutSuccessUrl("/login");
+                .logout()
+                .logoutSuccessUrl("/login");
     }
 }

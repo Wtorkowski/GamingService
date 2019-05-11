@@ -1,61 +1,49 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: bart
-  Date: 17.02.19
-  Time: 09:26
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Home</title>
-    <style>
+    <jsp:include page="fragments/header-link.jsp"/>
 
-    </style>
+    <title>Logowanie</title>
 </head>
 <body>
+<jsp:include page="fragments/logged_user.jsp"/>
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4" align="center">
+        <c:if test="${not empty errorMessage}">
+            <div style="color:red; font-weight: bold; margin: 30px 0px;">${errorMessage}</div>
+        </c:if>
+    </div>
+    <div class="col-4"></div>
 
-<h1>Gaming Service</h1>
+</div>
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4" align="center">
+        <form name='login' action="/login" method='POST'>
+            Username:<br>
+            <input type='text' name='username' value=''><br>
+            <br>
+            Password:<br>
+            <input type='password' name='password'/><br>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><br>
+            <input name="submit" type="submit" value="Sign in"/><br>
 
-<c:if test="${not empty errorMessage}">
-    <div style="color:red; font-weight: bold; margin: 30px 0px;">${errorMessage}</div>
-</c:if>
-
-<form name='login' action="/login" method='POST'>
-    <table>
-        <tr>
-            <td>Username:</td>
-            <td><input type='text' name='username' value=''></td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type='password' name='password'/></td>
-        </tr>
-        <tr>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <td colspan='2' style="text-align: right"><input name="submit" type="submit" value="Sign in"/></td>
-        </tr>
-    </table>
-</form>
-<table>
-    <tr>
-        <td>Forgot password?</td>
-        <td>
-            <button onclick=window.location.href="login/forgotten_password">Lost password</button>
-        </td>
-    </tr>
-     <tr>
-        <td> </td>
-        <td> </td>
-    </tr>
-    <tr>
-        <td>Not registered yet?</td>
-        <td>
-            <button onclick=window.location.href="register">Join now</button>
-        </td>
-    </tr>
-</table>
+        </form>
+    </div>
+    <div class="col-4"></div>
+</div>
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4" align="center">Don't have an account? <a href="/register">Sign up</a><br>
+        <a href="/login/forgotten_password">Forgot your password? </a></div>
+    <div class="col-4"></div>
+</div>
+<footer class="page-footer font-small">
+    <jsp:include page="fragments/footer.jsp"/>
+</footer>
 </body>
 </html>

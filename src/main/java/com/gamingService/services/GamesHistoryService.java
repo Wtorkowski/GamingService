@@ -21,15 +21,7 @@ public interface GamesHistoryService {
 
     List<MastermindTopScoresDTO> getTopScoresList(String difficulty);
 
-//    void saveFinishedGame(GamesHistory gamesHistory);
-
     MastermindGameHistoryDTO getLastMastermindGameHistoryDTO(GamesHistory gamesHistory);
-
-//    int getSumAllUserGames();
-//
-//    String getAverageAttempts();
-//
-//    String getTotalTimePlayed();
 
     MastermindStatsDTO getStatsToDisplay();
 

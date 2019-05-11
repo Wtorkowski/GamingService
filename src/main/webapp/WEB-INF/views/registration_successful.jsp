@@ -9,12 +9,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <jsp:include page="fragments/header-link.jsp"/>
     <title>Registered</title>
 </head>
 <body>
-
-<c:out value="${registered_user_name} successfully registered."/>
-<button onclick=window.location.href="/login">Sign in</button>
-
+<jsp:include page="fragments/logged_user.jsp"/>
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <c:out value="${registered_user_name} successfully registered."/>
+        <button onclick=window.location.href="/login">Sign in</button>
+    </div>
+    <div class="col-4"></div>
+</div>
 </body>
 </html>
