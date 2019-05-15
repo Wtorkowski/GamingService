@@ -13,7 +13,6 @@ import javax.validation.constraints.Size;
 @RequiredArgsConstructor
 @Setter
 @Getter
-
 @RepeatPassword
 public class RegistrationFormDTO {
 

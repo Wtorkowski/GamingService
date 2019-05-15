@@ -11,7 +11,7 @@
 <div>
     <div class="row">
         <div class="col-4"></div>
-        <div class="col-4">super extra logo file</div>
+        <div class="col-4"><h2>Gaming Service</h2></div>
         <div class="col-4"></div>
     </div>
 
@@ -19,7 +19,7 @@
         <div class="col-4"></div>
         <div class="col-2">
             <sec:authorize access="isAuthenticated()">
-                <h3>${user.userName}</h3> logged
+             <p style="font-size: large">${user.userName} logged</p>
             </sec:authorize>
         </div>
         <div class="col-1"></div>

@@ -17,7 +17,7 @@
 <div class="row">
     <div class="col-4"></div>
     <div class="col-4">
-        <c:out value="${registered_user_name} successfully registered."/>
+        <c:out value="${registered_user_name} you are successfully registered."/>
         <button onclick=window.location.href="/login">Sign in</button>
     </div>
     <div class="col-4"></div>

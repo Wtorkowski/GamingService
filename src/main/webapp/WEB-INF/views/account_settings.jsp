@@ -20,8 +20,6 @@
 <body>
 <jsp:include page="fragments/logged_user.jsp"/>
 
-<br>
-<div class="row">
     <div class="col-4>"></div>
     <div class="col-4>" align="center">
        
@@ -79,6 +77,5 @@
         <button onclick=window.location.href="/main_menu">Return to Main menu</button>
     </div>
     <div class="col-4>"></div>
-</div>
 </body>
 </html>

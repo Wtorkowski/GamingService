@@ -37,9 +37,8 @@
         </button>
         <br>
         <br>
-        <button onclick=window.location.href="/achievements">Achievements</button>
-        <br>
-        <br>
+        <button disabled onclick=window.location.href="/achievements">Achievements</button>
+        <p style="color: dimgrey">(Achievements currently not available)</p>
         <button onclick=window.location.href="/account_settings">Account settings</button>
         <br>
     </div>

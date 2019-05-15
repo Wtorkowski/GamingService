@@ -21,13 +21,13 @@ public interface GamesHistoryRepository extends JpaRepository<GamesHistory, Long
     }
 
 
-    List<GamesHistory> findTop10ByGameNameIsAndDifficultyIsOrderByAttemptsAscDurationAsc(String gameName, String difficulty);
+    List<GamesHistory> findTop10ByGameNameIsAndDifficultyIsAndUpdatedNotNullOrderByAttemptsAscDurationAsc(String gameName, String difficulty);
 
     default List<GamesHistory> topTenMastermindScores(String difficulty) {
-        return findTop10ByGameNameIsAndDifficultyIsOrderByAttemptsAscDurationAsc("mastermind", difficulty);
+        return findTop10ByGameNameIsAndDifficultyIsAndUpdatedNotNullOrderByAttemptsAscDurationAsc("mastermind", difficulty);
     }
 
-
+//TODO fix query........
     GamesHistory findTopByUserIdIsAndGameNameIsAndDifficultyIsAndUpdatedNotNullOrderByAttemptsAscDurationAsc(long userID, String gameName, String difficulty);
 
     default GamesHistory topMastermindScore(long userId, String difficulty) {

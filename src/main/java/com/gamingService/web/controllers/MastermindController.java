@@ -22,6 +22,7 @@ public class MastermindController {
 
     @GetMapping("/home")
     public String prepareMmHomePage(Model model) {
+        mastermindService.clearAttemptsTable();
         model.addAttribute("user", userService.currentUserDTO());
         return "mastermind/mastermind_home";
     }

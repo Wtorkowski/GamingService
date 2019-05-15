@@ -6,7 +6,7 @@
 <head>
     <jsp:include page="fragments/header-link.jsp"/>
 
-    <title>Logowanie</title>
+    <title>Login</title>
 </head>
 <body>
 <jsp:include page="fragments/logged_user.jsp"/>

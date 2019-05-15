@@ -32,9 +32,9 @@
     <div class="col-3"></div>
 </div>
 <div class="row">
-    <div class="col-4"></div>
-    <div class="col-4" align="center">
-        <table style="text-align: center">
+    <div class="col-3"></div>
+    <div class="col-5" align="center">
+        <table style="text-align: center;font-size: x-large">
             <tr>
                 <td colspan="3">
                     Difficulty:
@@ -134,7 +134,7 @@
         <br>
         <button onclick=window.location.href="/mastermind/home">Return to Mastermind menu</button>
     </div>
-    <div class="col-4"></div>
+    <div class="col-3"></div>
 </div>
 </body>
 </html>

@@ -12,7 +12,7 @@
 <head>
     <jsp:include page="fragments/header-link.jsp"/>
 
-    <title>Lost password</title>
+    <title>Password recovery</title>
     <style>
 
     </style>
@@ -21,7 +21,7 @@
 <jsp:include page="fragments/logged_user.jsp"/>
 <div class="row">
     <div class="col-4"></div>
-    <div class="col-4">
+    <div class="col-4" align="center">
         <h1>Forgot your password?<br>
             3 simple ways to improve your memory:
             <ul>

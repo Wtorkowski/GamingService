@@ -35,7 +35,6 @@ public class LoggedUser {
             } else {
                 this.user = null;
             }
-
         }
         return user;
     }
