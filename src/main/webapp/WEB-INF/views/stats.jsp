@@ -41,6 +41,9 @@
                     <td><c:out value="Average game duration (to whole seconds):"/></td>
                     <td> ${statistics.averageDuration}</td>
                 </tr>
+                <tr>
+                    <td colspan="2"><br></td>
+                </tr>
                 <c:forEach items="${statistics.topScores}" var="gh">
                     <tr>
                         <th colspan="2"><c:out value="Top score for ${gh.difficulty} difficulty:"/></th>
@@ -56,6 +59,9 @@
                     <tr>
                         <td><c:out value="Finished on:"/></td>
                         <td>${gh.updated}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><br></td>
                     </tr>
                 </c:forEach>
             </table>

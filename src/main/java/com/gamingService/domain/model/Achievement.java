@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Table(name = "achievement")
+@Table(name = "achievements")
 @Getter
 @Setter
 @NoArgsConstructor

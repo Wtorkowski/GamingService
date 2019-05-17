@@ -16,14 +16,14 @@
 <body>
 <jsp:include page="../fragments/logged_user.jsp"/>
 <div class="row">
-    <div class="col-2"></div>
-    <div class="col-8" align="center">
+    <div class="col-1"></div>
+    <div class="col-10" align="center">
 
         <h1>Congratulations ${user.userName} !</h1>
 
         <c:out value="The correct combination is: ${finishedGame.encrypted}."/><br>
         <c:out value="You have guessed the combination after ${finishedGame.attempts} attempts in ${finishedGame.duration}."/>
-
+        <c:out value="Top 10 scores for difficulty level: ${finishedGame.difficulty}"/>
         <table style="text-align: center">
             <tr>
                 <th>Position</th>
@@ -49,7 +49,7 @@
         <br>
         <button onclick=window.location.href="/main_menu">Return to Main menu</button>
     </div>
-    <div class="col-2"></div>
+    <div class="col-1"></div>
 </div>
 </body>
 </html>

@@ -57,9 +57,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/mastermind/**",
                         "/stats",
                         "/account_settings")
-                .authenticated()
+                        .authenticated()
                 .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
-                .antMatchers("/login", "/login/**", "/register", "/register/**").permitAll()
+                .antMatchers("/login", "/login/**", "/register", "/register/**","/h2**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
