@@ -19,7 +19,7 @@
     <div class="col-3"></div>
     <div class="col-6">
         <div style="height:220px;width: 760px ">
-            <img id="mastermind_img" src="/img/mastermind.png" alt="mastermind_solution">
+            <img id="mastermind_img" src="/img/solution.png" alt="mastermind_solution">
         </div>
     </div>
     <div class="col-4"></div>
@@ -28,11 +28,11 @@
 <div class="row">
     <div class="col-4"></div>
     <div class="col-4" align="center">
-        <h2>Choose difficulty level</h2>
+        <h2>Choose a difficulty level</h2>
         <form action="/mastermind/home" method="POST">
-            Easy <input type="radio" name="difficulty" value="easy"><br>
-            Medium <input type="radio" name="difficulty" value="medium" checked><br>
-            Hard <input type="radio" name="difficulty" value="hard"><br>
+            <h3> Easy <input type="radio" name="difficulty" value="easy"></h3><br>
+           <h3> Medium <input type="radio" name="difficulty" value="medium" checked></h3><br>
+          <h3> Hard <input type="radio" name="difficulty" value="hard"></h3><br>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><br>
             <input type="submit" value="Start game">
         </form>
