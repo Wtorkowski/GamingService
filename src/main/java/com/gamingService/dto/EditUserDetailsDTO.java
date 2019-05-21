@@ -14,7 +14,7 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 public class EditUserDetailsDTO {
 
-    @NotBlank
+    @NotBlank(message = "Enter current password!")
     private String oldPassword;
 
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,20}$",

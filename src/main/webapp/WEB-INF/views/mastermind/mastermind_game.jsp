@@ -26,7 +26,7 @@
     <div class="col-3"></div>
     <div class="col-6">
         <div style="height:220px;width: 760px ">
-            <img id="mastermind_img" src="/img/mastermind.png" alt="mastermind_solution">
+            <img id="mastermind_img" src="/img/solution.png" alt="mastermind_solution">
         </div>
     </div>
     <div class="col-3"></div>

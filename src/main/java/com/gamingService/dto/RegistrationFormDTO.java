@@ -2,22 +2,20 @@ package com.gamingService.dto;
 
 import com.gamingService.annotations.RepeatPassword;
 import com.gamingService.annotations.UniqueUserName;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter
 @RepeatPassword
+@Builder
 public class RegistrationFormDTO {
 
-    @NotBlank
-    @Size(min = 3, max = 20)
+    @Size(min = 3, max = 20,message = "Wrong user name pattern!")
     @UniqueUserName
     private String userName;
 

@@ -17,6 +17,8 @@
     </style>
 </head>
 <body>
+<jsp:include page="fragments/logged_user.jsp"/>
+
 <div class="row">
     <div class="col-4"></div>
     <div class="col-4" align="center">

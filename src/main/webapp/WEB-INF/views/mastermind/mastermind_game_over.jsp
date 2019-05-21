@@ -22,7 +22,7 @@
         <h1>Congratulations ${user.userName} !</h1>
 
         <c:out value="The correct combination is: ${finishedGame.encrypted}."/><br>
-        <c:out value="You have guessed the combination after ${finishedGame.attempts} attempts in ${finishedGame.duration}."/>
+        <c:out value="You have guessed the combination after: ${finishedGame.attempts} attempts in: ${finishedGame.duration}."/><br>
         <c:out value="Top 10 scores for difficulty level: ${finishedGame.difficulty}"/>
         <table style="text-align: center">
             <tr>

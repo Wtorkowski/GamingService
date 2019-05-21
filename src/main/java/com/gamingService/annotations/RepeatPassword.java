@@ -17,6 +17,8 @@ public @interface RepeatPassword {
 
     String message() default "Passwords are not the same!";
 
+    String path() default "password";
+
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};

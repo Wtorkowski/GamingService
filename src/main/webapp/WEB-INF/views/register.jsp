@@ -27,15 +27,13 @@
             <%--@elvariable id="userRegistrationDto" type="com"--%>
             <form:form id="register" method="POST" modelAttribute="registrationForm">
                 <tr>
-                    <td>
-                        <form:errors path="*" cssStyle="color: red"/>
+                    <td colspan="2"><form:errors path="*" cssStyle="color: red"/>
                     </td>
-                    <td></td>
                 </tr>
                 <tr>
                     <td>Login:</td>
                     <td>
-                        <form:input path="userName" pattern="[a-zA-Z0-9]{3,20}"/>
+                        <form:input path="userName" pattern="[a-zA-Z0-9]{3,20}"/><br>
                     </td>
                 </tr>
                 <tr>
@@ -52,7 +50,8 @@
                         Password:
                     </td>
                     <td>
-                        <form:password path="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,20}$"/>
+                        <form:password path="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,20}$"/><br>
+
                     </td>
                 </tr>
                 <tr>
@@ -69,7 +68,7 @@
                     <td>Repeat password:</td>
                     <td>
                         <form:password path="repeatPassword"
-                                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,20}$"/>
+                                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,20}$"/><br>
                     </td>
                 </tr>
                 <tr>
@@ -79,7 +78,7 @@
             </form:form>
         </table>
         <br>
-        <button onclick=window.location.href="/">Return to login page</button>
+        <button onclick=window.location.href="/login">Return to login page</button>
     </div>
     <div class="col-4"></div>
 </div>

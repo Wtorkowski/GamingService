@@ -13,6 +13,23 @@
 <div class="row">
     <div class="col-4"></div>
     <div class="col-4" align="center">
+        <c:out value="Ready to use registered players for demo purposes only:"/><br>
+        <table>
+            <tr>
+                <td>1st time logged in: </td>
+                <td>"newbie"</td>
+                <td>Password1</td>
+            </tr>
+            <br>
+            <tr>
+                <td>Experienced player:  </td>
+                <td>"veteran"</td>
+                <td>Password1</td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <br>
         <c:if test="${not empty errorMessage}">
             <div style="color:red; font-weight: bold; margin: 30px 0px;">${errorMessage}</div>
         </c:if>

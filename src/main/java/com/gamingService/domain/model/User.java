@@ -1,5 +1,7 @@
 package com.gamingService.domain.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +13,8 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @Table(name = "users")
 public class User extends AbstractEntity {
 
@@ -47,6 +51,7 @@ public class User extends AbstractEntity {
         this.mastermindAttempts = mastermindAttempts;
         return this;
     }
+
 
     @Override
     public boolean equals(Object o) {

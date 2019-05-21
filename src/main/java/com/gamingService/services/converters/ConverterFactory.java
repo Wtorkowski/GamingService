@@ -35,20 +35,21 @@ public class ConverterFactory {
     }
 
     public static UserDTO convertUserToDTO(User user) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(user.getId());
-        userDTO.setUserName(user.getUserName());
-        return userDTO;
+        return UserDTO.builder()
+                .id(user.getId())
+                .userName(user.getUserName())
+                .build();
     }
 
     public static MastermindAttempts fromResourcesToMastermindAttempts(String feedback,
                                                                        Decription decription,
                                                                        User user) {
-        MastermindAttempts attempt = new MastermindAttempts();
-        attempt.setDecriptionAttempt(decription.getDecription());
-        attempt.setFeedback(feedback);
-        attempt.setUser(user);
-        return attempt;
+
+        return MastermindAttempts.builder()
+                .decriptionAttempt(decription.getDecription())
+                .feedback(feedback)
+                .user(user)
+                .build();
     }
 
     public static User updatePassword(String password, User user) {
@@ -59,21 +60,23 @@ public class ConverterFactory {
     }
 
     public static User fromResourceToUser(RegistrationFormDTO registrationFormDTO) {
-        User user = new User();
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        user.setUserName(registrationFormDTO.getUserName());
-        user.setPassword(passwordEncoder.encode(registrationFormDTO.getPassword()));
-        user.beforeSave();
+        User user = User.builder()
+                .userName(registrationFormDTO.getUserName())
+                .password(passwordEncoder.encode(registrationFormDTO.getPassword()))
+                .build();
+        user.beforeUpdate();
         return user;
     }
 
     public static GamesHistory mastermindStartGameResources(String encrypted, User user, String difficulty) {
-        GamesHistory gamesHistory = new GamesHistory();
-        gamesHistory.setGameName("mastermind");
-        gamesHistory.setAttempts(0);
-        gamesHistory.setEncrypted(encrypted);
-        gamesHistory.setUser(user);
-        gamesHistory.setDifficulty(difficulty);
+        GamesHistory gamesHistory = GamesHistory.builder()
+                .gameName("mastermind")
+                .attempts(0)
+                .encrypted(encrypted)
+                .user(user)
+                .difficulty(difficulty)
+                .build();
         gamesHistory.beforeSave();
         return gamesHistory;
     }
@@ -99,7 +102,9 @@ public class ConverterFactory {
         toDisplay.add(timePeriodToString(hours, "hour"));
         toDisplay.add(timePeriodToString(minutes, "minute"));
         toDisplay.add(timePeriodToString(seconds, "second"));
-        return String.join("", toDisplay);
+        String result = String.join("", toDisplay);
+
+        return result.substring(0, result.length() - 1);
     }
 
     private static String timePeriodToString(int timePeriod, String nameOfPeriod) {
@@ -117,14 +122,14 @@ public class ConverterFactory {
     }
 
     public static MastermindGameHistoryDTO fromGameHistoryToDTO(GamesHistory gamesHistory) {
-        MastermindGameHistoryDTO finishedGame = new MastermindGameHistoryDTO();
-        finishedGame.setAttempts(gamesHistory.getAttempts());
-        finishedGame.setDifficulty(gamesHistory.getDifficulty());
-        finishedGame.setDuration(ConverterFactory.formatSecondsToDisplay(gamesHistory.getDuration()));
-        finishedGame.setEncrypted(gamesHistory.getEncrypted());
-        finishedGame.setUpdated(ConverterFactory.formatDateToDisplay(gamesHistory.getUpdated()));
-        finishedGame.setUser(gamesHistory.getUser());
-        return finishedGame;
+        return MastermindGameHistoryDTO.builder()
+                .attempts(gamesHistory.getAttempts())
+                .difficulty(gamesHistory.getDifficulty())
+                .duration(ConverterFactory.formatSecondsToDisplay(gamesHistory.getDuration()))
+                .encrypted(gamesHistory.getEncrypted())
+                .updated(ConverterFactory.formatDateToDisplay(gamesHistory.getUpdated()))
+                .user(gamesHistory.getUser())
+                .build();
     }
 
     public static String formatDoubleToTwoDecimal(double num) {

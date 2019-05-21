@@ -1,13 +1,13 @@
 package com.gamingService.dto;
 
 import com.gamingService.domain.model.User;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class MastermindGameHistoryDTO {
     private User user;
     private String updated;

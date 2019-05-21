@@ -1,8 +1,6 @@
 package com.gamingService.domain.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -12,9 +10,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "mastermind_attempts")
 public class MastermindAttempts {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
