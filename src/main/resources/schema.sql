@@ -4,12 +4,12 @@ create table games_history (id bigint not null auto_increment, created datetime(
 create table hibernate_sequence (next_val bigint);
 insert into hibernate_sequence values ( 1 );
 create table mastermind_attempts (id bigint not null, created datetime(6), decription_attempt varchar(5) not null, feedback varchar(255) not null, user_id bigint, primary key (id));
-create table users (id bigint not null auto_increment, created datetime(6), updated datetime(6), password varchar(255) not null, user_name varchar(20) not null, primary key (id));
+create table users (id bigint not null auto_increment, created datetime(6), updated datetime(6), password varchar(255) not null, username varchar(20) not null, primary key (id));
 
-INSERT INTO users (created, password, user_name)
+INSERT INTO users (created, password, username)
     VALUES (now(), '{noop}Password1', 'newbie');
-INSERT INTO users (created, password, user_name)
-    VALUES (now(), '{noop}Password1', 'veteran'); 
+INSERT INTO users (created, password, username)
+    VALUES (now(), '{noop}Password1', 'veteran');
 
 INSERT INTO games_history (created, updated, attempts, difficulty, duration, encrypted, game_name, user_id)
     VALUES (now(), now(),9,'medium',235,2345,'mastermind',2);

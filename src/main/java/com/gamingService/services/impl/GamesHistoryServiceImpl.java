@@ -38,27 +38,27 @@ public class GamesHistoryServiceImpl implements GamesHistoryService {
 
     @Override
     public void deletePreviousUnfinishedGames() {
-        gamesHistoryRepository.deleteAllByUserIdIsAndAttemptsIs(loggedUser.value().getId(), 0);
+        gamesHistoryRepository.deleteAllByUserUsernameIsAndAttemptsIs(loggedUser.getName(), 0);
     }
 
     @Override
     public String getMastermindEncryptedCode(String difficulty) {
-        return gamesHistoryRepository.getEncryptedCode(loggedUser.value().getId(), difficulty);
+        return gamesHistoryRepository.getEncryptedCode(loggedUser.getName(), difficulty);
     }
 
     @Override
     public GamesHistory updateFinishedMastermindGame() {
-        int attempts = mastermindAttemptsRepository.countMastermindAttemptsByUserIdIs(loggedUser.value().getId());
+        int attempts = mastermindAttemptsRepository.countMastermindAttemptsByUserUsernameIs(loggedUser.getName());
         long duration = gameDuration();
-        GamesHistory currentEntity = gamesHistoryRepository.findLastGameByUser(loggedUser.value().getId());
+        GamesHistory currentEntity = gamesHistoryRepository.findLastGameByUser(loggedUser.getName());
         GamesHistory readyToSave = ConverterFactory.updateFinishedMastermind(currentEntity, attempts, duration);
         gamesHistoryRepository.save(readyToSave);
         return readyToSave;
     }
 
     private Long gameDuration() {
-        MastermindAttempts startEntity = mastermindAttemptsRepository.findFirstByUserIdIs(loggedUser.value().getId());
-        MastermindAttempts endEntity = mastermindAttemptsRepository.findFirstByUserIdIsOrderByCreatedDesc(loggedUser.value().getId());
+        MastermindAttempts startEntity = mastermindAttemptsRepository.findFirstByUserUsernameIs(loggedUser.getName());
+        MastermindAttempts endEntity = mastermindAttemptsRepository.findFirstByUserUsernameIsOrderByCreatedDesc(loggedUser.getName());
         return Duration.between(startEntity.getCreated(),
                 endEntity.getCreated())
                 .getSeconds();
@@ -78,20 +78,20 @@ public class GamesHistoryServiceImpl implements GamesHistoryService {
 
     @Override
     public boolean isAnyGameFinished() {
-        return gamesHistoryRepository.anyFinishedGameExists(loggedUser.value().getId());
+        return gamesHistoryRepository.anyFinishedGameExists(loggedUser.getName());
     }
 
     @Override
     public MastermindStatsDTO getStatsToDisplay() {
-        long userId = loggedUser.value().getId();
-        int sumOfGames = gamesHistoryRepository.sumOfUserGames(userId);
-        int sumOfAttempts = gamesHistoryRepository.sumAllUserAttempts(userId);
-        long totalDuration = gamesHistoryRepository.getTotalDuration(userId);
+        String userName = loggedUser.getName();
+        int sumOfGames = gamesHistoryRepository.sumOfUserGames(userName);
+        int sumOfAttempts = gamesHistoryRepository.sumAllUserAttempts(userName);
+        long totalDuration = gamesHistoryRepository.getTotalDuration(userName);
         String avgAttempts = averageAttempts(sumOfGames, sumOfAttempts);
         String avgDuration = averageDuration(sumOfGames, totalDuration);
         List<MastermindGameHistoryDTO> topScores = getMastermindDifficultyTop();
         return MastermindStatsDTO.builder()
-                .userName(loggedUser.value().getUserName())
+                .userName(userName)
                 .gamesTotal(sumOfGames)
                 .averageAttempts(avgAttempts)
                 .durationTotal(ConverterFactory.formatSecondsToDisplay(totalDuration))
@@ -119,27 +119,27 @@ public class GamesHistoryServiceImpl implements GamesHistoryService {
     }
 
     private List<MastermindGameHistoryDTO> getMastermindDifficultyTop() {
-        long userId = loggedUser.value().getId();
+        String userName = loggedUser.getName();
         String easy = "easy";
         String medium = "medium";
         String hard = "hard";
         List<MastermindGameHistoryDTO> topScores = new ArrayList<>();
-        if (gamesHistoryRepository.isTopScoreAvailable(userId, easy)) {
+        if (gamesHistoryRepository.isTopScoreAvailable(userName, easy)) {
             topScores.add(setExistingMastermindTopScore(easy));
         }
-        if (gamesHistoryRepository.isTopScoreAvailable(userId, medium)) {
+        if (gamesHistoryRepository.isTopScoreAvailable(userName, medium)) {
             topScores.add(setExistingMastermindTopScore(medium));
         }
-        if (gamesHistoryRepository.isTopScoreAvailable(userId, hard)) {
+        if (gamesHistoryRepository.isTopScoreAvailable(userName, hard)) {
             topScores.add(setExistingMastermindTopScore(hard));
         }
         return topScores;
     }
 
     private MastermindGameHistoryDTO setExistingMastermindTopScore(String difficulty) {
-        long userId = loggedUser.value().getId();
-        if (gamesHistoryRepository.isTopScoreAvailable(userId, difficulty)) {
-            return ConverterFactory.fromGameHistoryToDTO(gamesHistoryRepository.topMastermindScore(userId, difficulty));
+
+        if (gamesHistoryRepository.isTopScoreAvailable(loggedUser.getName(), difficulty)) {
+            return ConverterFactory.fromGameHistoryToDTO(gamesHistoryRepository.topMastermindScore(loggedUser.getName(), difficulty));
         }
         return null;
     }

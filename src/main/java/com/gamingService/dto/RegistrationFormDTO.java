@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 @Builder
 public class RegistrationFormDTO {
 
-    @Size(min = 3, max = 20,message = "Wrong user name pattern!")
+    @Size(min = 3, max = 20, message = "Wrong user name pattern!")
     @UniqueUserName
     private String userName;
 
@@ -24,5 +24,4 @@ public class RegistrationFormDTO {
     private String password;
 
     private String repeatPassword;
-
 }

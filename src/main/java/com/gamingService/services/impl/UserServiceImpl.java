@@ -28,15 +28,15 @@ public class UserServiceImpl implements UserService {
         userRepository.save(userToRegister);
     }
 
-    @Override
-    public UserDTO currentUserDTO() {
-        return loggedUser.value();
-    }
+//    @Override
+//    public UserDTO currentUserDTO() {
+//        return loggedUser.value();
+//    }
 
     @Override
     public boolean checkIfValidPassword(String oldPassword) {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        String encodedPass = userRepository.getLoggedUserPassword(loggedUser.value().getId());
+        String encodedPass = userRepository.getLoggedUserPassword(loggedUser.getName());
         return passwordEncoder.matches(oldPassword, encodedPass);
     }
 

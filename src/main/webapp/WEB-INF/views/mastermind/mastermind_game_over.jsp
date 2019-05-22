@@ -19,11 +19,13 @@
     <div class="col-1"></div>
     <div class="col-10" align="center">
 
-        <h1>Congratulations ${user.userName} !</h1>
+        <h1>Congratulations ${username} !</h1>
 
         <c:out value="The correct combination is: ${finishedGame.encrypted}."/><br>
         <c:out value="You have guessed the combination after: ${finishedGame.attempts} attempts in: ${finishedGame.duration}."/><br>
-        <c:out value="Top 10 scores for difficulty level: ${finishedGame.difficulty}"/>
+        <br>
+        <br>
+       <h2> <c:out value="Top 10 scores for difficulty level: ${finishedGame.difficulty}"/></h2>
         <table style="text-align: center">
             <tr>
                 <th>Position</th>
@@ -36,7 +38,7 @@
                 <tr<c:if test="${el.user == finishedGame.user && el.updated == finishedGame.updated}">
                     style="background-color: deepskyblue" </c:if>>
                     <td>${status.count}</td>
-                    <td> ${el.user.userName}</td>
+                    <td> ${el.user.username}</td>
                     <td>${el.attempts}</td>
                     <td>${el.duration}</td>
                     <td>${el.updated}</td>

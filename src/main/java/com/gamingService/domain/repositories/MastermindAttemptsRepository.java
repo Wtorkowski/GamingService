@@ -8,14 +8,14 @@ import java.util.List;
 
 public interface MastermindAttemptsRepository extends JpaRepository<MastermindAttempts, Long> {
 
-    List<MastermindAttempts> findAllByUserIdIsOrderByCreated(long userId);
+    List<MastermindAttempts> findAllByUserUsernameIsOrderByCreated(String userName);
 
     @Transactional
-    void deleteMastermindAttemptsByUserIdIs(long userId);
+    void deleteMastermindAttemptsByUserUsernameIs(String userName);
 
-    int countMastermindAttemptsByUserIdIs(long userId);
+    int countMastermindAttemptsByUserUsernameIs(String userName);
 
-    MastermindAttempts findFirstByUserIdIs(long userId);
+    MastermindAttempts findFirstByUserUsernameIs(String userName);
 
-    MastermindAttempts findFirstByUserIdIsOrderByCreatedDesc(long userId);
+    MastermindAttempts findFirstByUserUsernameIsOrderByCreatedDesc(String userName);
 }

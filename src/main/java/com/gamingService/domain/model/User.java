@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -20,7 +21,8 @@ public class User extends AbstractEntity {
 
     @Size(min = 3, max = 20)
     @Column(unique = true, nullable = false)
-    private String userName;
+    @UniqueElements
+    private String username;
 
 
     @Column(nullable = false)
@@ -39,7 +41,7 @@ public class User extends AbstractEntity {
     }
 
     public User(@Size(min = 3, max = 20) String userName, String password) {
-        this.userName = userName;
+        this.username = userName;
         this.password = password;
     }
 
@@ -59,18 +61,18 @@ public class User extends AbstractEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         User user = (User) o;
-        return Objects.equals(userName, user.userName);
+        return Objects.equals(username, user.username);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), userName);
+        return Objects.hash(super.hashCode(), username);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userName='" + userName + '\'' +
+                "userName='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", gameHistories=" + gamesHistory +
                 "} " + super.toString();

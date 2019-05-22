@@ -1,5 +1,6 @@
 package com.gamingService.web.controllers;
 
+import com.gamingService.core.components.LoggedUser;
 import com.gamingService.domain.model.Decription;
 import com.gamingService.domain.model.GamesHistory;
 import com.gamingService.services.impl.GamesHistoryServiceImpl;
@@ -19,11 +20,12 @@ public class MastermindController {
     private GamesHistoryServiceImpl gamesHistoryService;
     private MastermindServiceImpl mastermindService;
     private UserServiceImpl userService;
+    private LoggedUser loggedUser;
 
     @GetMapping("/home")
     public String prepareMmHomePage(Model model) {
         mastermindService.clearAttemptsTable();
-        model.addAttribute("user", userService.currentUserDTO());
+        model.addAttribute("username", loggedUser.getName());
         return "mastermind/mastermind_home";
     }
 
@@ -37,7 +39,7 @@ public class MastermindController {
 
     @GetMapping("/game/{difficulty}")
     public String prepareGamePAge(@PathVariable String difficulty, Model model) {
-        model.addAttribute("user",userService.currentUserDTO());
+        model.addAttribute("username", loggedUser.getName());
         model.addAttribute("difficulty", difficulty);
         model.addAttribute("decription", new Decription());
         return "mastermind/mastermind_game";
@@ -48,7 +50,7 @@ public class MastermindController {
                        @ModelAttribute Decription decription,
                        Model model,
                        BindingResult result) {
-        model.addAttribute("user",userService.currentUserDTO());
+        model.addAttribute("username", loggedUser.getName());
         model.addAttribute("difficulty", difficulty);
         model.addAttribute("attemptsList", mastermindService.findAllAttemptsByUserId());
         if (!mastermindService.isDecriptionInputPatternCorrect(difficulty, decription)) {
@@ -73,7 +75,7 @@ public class MastermindController {
     @GetMapping("/game_over/{difficulty}")
     public String generateGameOverPage(@PathVariable String difficulty, Model model) {
         GamesHistory finishedGame = gamesHistoryService.updateFinishedMastermindGame();
-        model.addAttribute("user",userService.currentUserDTO());
+        model.addAttribute("username", loggedUser.getName());
         model.addAttribute("finishedGame", gamesHistoryService.getLastMastermindGameHistoryDTO(finishedGame));
         model.addAttribute("topScores", gamesHistoryService.getTopScoresList(difficulty));
         return "mastermind/mastermind_game_over";

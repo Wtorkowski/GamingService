@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    User findByUserName(String username);
+    User findByUsernameIs(String username);
 
-    @Query("SELECT CASE WHEN COUNT (u)=0 THEN TRUE ELSE FALSE END FROM User u WHERE u.userName=?1")
-    boolean isUsernameAvailable(String userName);
+    @Query("SELECT CASE WHEN COUNT (u)=0 THEN TRUE ELSE FALSE END FROM User u WHERE u.username=?1")
+    boolean isUsernameAvailable(String username);
 
-    @Query("SELECT u.password FROM User u WHERE id=?1")
-    String getLoggedUserPassword(Long id);
+    @Query("SELECT u.password FROM User u WHERE username=?1")
+    String getLoggedUserPassword(String username);
 }
 
 

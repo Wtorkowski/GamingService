@@ -18,7 +18,7 @@
         <div class="col-3"></div>
         <div class="col-2">
             <sec:authorize access="isAuthenticated()">
-                <p style="font-size: large">${user.userName} logged</p>
+                <p style="font-size: large">${username} logged</p>
             </sec:authorize>
         </div>
         <div class="col-2"></div>

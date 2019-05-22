@@ -22,17 +22,17 @@ public class MastermindServiceImpl implements MastermindService {
 
     @Override
     public List<MastermindAttempts> findAllAttemptsByUserId() {
-        return mastermindAttemptsRepository.findAllByUserIdIsOrderByCreated(loggedUser.value().getId());
+        return mastermindAttemptsRepository.findAllByUserUsernameIsOrderByCreated(loggedUser.getName());
     }
 
     @Override
     public void clearAttemptsTable() {
-        mastermindAttemptsRepository.deleteMastermindAttemptsByUserIdIs(loggedUser.value().getId());
+        mastermindAttemptsRepository.deleteMastermindAttemptsByUserUsernameIs(loggedUser.getName());
     }
 
     @Override
     public boolean isCombinationDecrypted(Decription decriptionDTO, String difficulty) {
-        String encryptedCode = gamesHistoryRepository.getEncryptedCode(loggedUser.value().getId(), difficulty);
+        String encryptedCode = gamesHistoryRepository.getEncryptedCode(loggedUser.getName(), difficulty);
         return decriptionDTO.getDecription().equals(encryptedCode);
     }
 
@@ -68,7 +68,7 @@ public class MastermindServiceImpl implements MastermindService {
 
     @Override
     public String generateFeedback(Decription decription, String difficulty) {
-        String encryptedCode = gamesHistoryRepository.getEncryptedCode(loggedUser.value().getId(), difficulty);
+        String encryptedCode = gamesHistoryRepository.getEncryptedCode(loggedUser.getName(), difficulty);
         StringBuilder feedback = new StringBuilder();
         StringBuilder encrypted = new StringBuilder(encryptedCode);
         String playersAttempt = decription.getDecription();

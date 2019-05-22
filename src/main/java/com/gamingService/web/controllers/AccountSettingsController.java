@@ -1,5 +1,6 @@
 package com.gamingService.web.controllers;
 
+import com.gamingService.core.components.LoggedUser;
 import com.gamingService.dto.EditUserDetailsDTO;
 import com.gamingService.services.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
@@ -16,17 +17,18 @@ import javax.validation.Valid;
 public class AccountSettingsController {
 
     private UserServiceImpl userService;
+    private LoggedUser loggedUser;
 
     @GetMapping
     String generateAccSettingsPage(Model model) {
         model.addAttribute("editDetails", new EditUserDetailsDTO());
-        model.addAttribute("user", userService.currentUserDTO());
+        model.addAttribute("username", loggedUser.getName());
         return "account_settings";
     }
 
     @PostMapping
     String updateAccountSettings(@Valid @ModelAttribute(value = "editDetails") EditUserDetailsDTO editUserDetailsDTO, BindingResult result, Model model) {
-        model.addAttribute("user", userService.currentUserDTO());
+        model.addAttribute("username", loggedUser.getName());
         if (!userService.checkIfValidPassword(editUserDetailsDTO.getOldPassword())) {
             result.rejectValue("oldPassword", null, "Wrong password!");
         }

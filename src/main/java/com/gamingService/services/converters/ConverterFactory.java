@@ -37,7 +37,7 @@ public class ConverterFactory {
     public static UserDTO convertUserToDTO(User user) {
         return UserDTO.builder()
                 .id(user.getId())
-                .userName(user.getUserName())
+                .username(user.getUsername())
                 .build();
     }
 
@@ -62,7 +62,7 @@ public class ConverterFactory {
     public static User fromResourceToUser(RegistrationFormDTO registrationFormDTO) {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         User user = User.builder()
-                .userName(registrationFormDTO.getUserName())
+                .username(registrationFormDTO.getUserName())
                 .password(passwordEncoder.encode(registrationFormDTO.getPassword()))
                 .build();
         user.beforeUpdate();

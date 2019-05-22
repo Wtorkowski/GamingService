@@ -1,5 +1,6 @@
 package com.gamingService.web.controllers;
 
+import com.gamingService.core.components.LoggedUser;
 import com.gamingService.services.impl.GamesHistoryServiceImpl;
 import com.gamingService.services.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
@@ -14,10 +15,11 @@ public class MainMenuController {
 
     private GamesHistoryServiceImpl gamesHistoryService;
     private UserServiceImpl userService;
+    private LoggedUser loggedUser;
 
     @GetMapping
     public String prepareMainMenuPage(Model model) {
-        model.addAttribute("user",userService.currentUserDTO());
+        model.addAttribute("username", loggedUser.getName());
         model.addAttribute("isAnyGameHistory", gamesHistoryService.isAnyGameFinished());
         return "main_menu";
     }
