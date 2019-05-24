@@ -20,5 +20,5 @@ I have used prehistoric jsp frontend in order to present this project in a more 
 
 ## Future implementations plan:
 1. Achievements system
-* Multiplayer using WebSockets
-* Battleships or a different fun to play multiplayer game 
+2. Multiplayer using WebSockets
+3. Battleships or a different fun to play multiplayer game 
