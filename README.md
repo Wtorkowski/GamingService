@@ -18,7 +18,7 @@ I have used prehistoric jsp frontend in order to present this project in a more 
 * Spring Forms
 * Custom Validation Annotations
 
-## Future implementations plan:
+## Future implementation plan:
 1. Achievements system
 2. Multiplayer using WebSockets
 3. Battleships or a different fun to play multiplayer game 
