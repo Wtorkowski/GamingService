@@ -2,6 +2,7 @@ package com.gamingService.services.impl;
 
 import com.gamingService.core.components.LoggedUser;
 import com.gamingService.domain.model.Decription;
+import com.gamingService.domain.model.EnumDifficulty;
 import com.gamingService.domain.model.MastermindAttempts;
 import com.gamingService.domain.repositories.GamesHistoryRepository;
 import com.gamingService.domain.repositories.MastermindAttemptsRepository;
@@ -102,7 +103,7 @@ public class MastermindServiceImpl implements MastermindService {
 
     private static int encryptedCodeLength(String difficulty) {
         int codeLength = 4;
-        if (difficulty.equals("hard")) {
+        if (difficulty.equals(EnumDifficulty.HARD.toString())) {
             codeLength = 5;
         }
         return codeLength;

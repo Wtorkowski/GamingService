@@ -25,6 +25,10 @@
 <div class="row">
     <div class="col-3"></div>
     <div class="col-6">
+        <div>
+            <c:out value="Mastermind is a code-breaking game. Computer encrypts a combination of digits, player’s task is to decrypt the combination using generated feedback. Check the image below to get an idea of how feedback works."/>
+        </div>
+        <br>
         <div style="height:220px;width: 760px ">
             <img id="mastermind_img" src="/img/solution.png" alt="mastermind_solution">
         </div>
@@ -33,7 +37,7 @@
 </div>
 <div class="row">
     <div class="col-3"></div>
-    <div class="col-5" align="center">
+    <div class="col-6" align="center">
         <table style="text-align: center;font-size: x-large">
             <tr>
                 <td colspan="3">
@@ -87,15 +91,15 @@
                         <c:when test="${difficulty == 'easy'}">
                             <form:input path="decription" autocomplete="off" required="required"
                                         pattern="[1-4]{4,4}"
-                                        autofocus="autofocus" onfocus="this.value=''"/></c:when>
+                                        autofocus="autofocus" onfocus="this.value=''" cssStyle="text-align: center"/></c:when>
                         <c:when test="${difficulty == 'medium'}">
                             <form:input path="decription" autocomplete="off" required="required"
                                         pattern="[1-6]{4,4}"
-                                        autofocus="autofocus" onfocus="this.value=''"/></c:when>
+                                        autofocus="autofocus" onfocus="this.value=''" cssStyle="text-align: center"/></c:when>
                         <c:when test="${difficulty == 'hard'}">
                             <form:input path="decription" autocomplete="off" required="required"
                                         pattern="[1-6]{5,5}"
-                                        autofocus="autofocus" onfocus="this.value=''"/></c:when>
+                                        autofocus="autofocus" onfocus="this.value=''" cssStyle="text-align: center"/></c:when>
                     </c:choose>
                 </td>
                 <td></td>
@@ -120,7 +124,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" value="Submit"></td>
+                <td><input class="btn btn-warning btn3d" type="submit" value="Submit"></td>
                 <td></td>
             </tr>
             </form:form>
@@ -132,7 +136,7 @@
         <br>
         <br>
         <br>
-        <button onclick=window.location.href="/mastermind/home">Return to Mastermind menu</button>
+        <button class="btn btn-info btn3d" onclick=window.location.href="/mastermind/home">Return to Mastermind menu</button>
     </div>
     <div class="col-3"></div>
 </div>

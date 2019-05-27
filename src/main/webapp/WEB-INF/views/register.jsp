@@ -73,12 +73,12 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type="submit" value="Join now"></td>
+                    <td><input class="btn btn-info btn3d" type="submit" value="Join now"></td>
                 </tr>
             </form:form>
         </table>
         <br>
-        <button onclick=window.location.href="/login">Return to login page</button>
+        <button class="btn btn-info btn3d" onclick=window.location.href="/login">Return to login page</button>
     </div>
     <div class="col-4"></div>
 </div>

@@ -14,4 +14,6 @@ public interface UserService {
     boolean passwordsMatch(EditUserDetailsDTO editUserDetailsDTO);
 
     void updatePassword(String password);
+
+//    User currentUserEntity();
 }

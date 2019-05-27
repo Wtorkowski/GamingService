@@ -40,16 +40,16 @@
                     <td>${status.count}</td>
                     <td> ${el.user.username}</td>
                     <td>${el.attempts}</td>
-                    <td>${el.duration}</td>
-                    <td>${el.updated}</td>
+                    <td>${el.duration}&nbsp;&nbsp;</td>
+                    <td>&nbsp;&nbsp;${el.updated}</td>
                 </tr>
             </c:forEach>
         </table>
         <br>
-        <button onclick=window.location.href="/mastermind/home">Play again</button>
+        <button class="btn btn-warning btn3d" onclick=window.location.href="/mastermind/home">Play again</button>
         <br>
         <br>
-        <button onclick=window.location.href="/main_menu">Return to Main menu</button>
+        <button class="btn btn-info btn3d" onclick=window.location.href="/main_menu">Return to Main menu</button>
     </div>
     <div class="col-1"></div>
 </div>

@@ -68,7 +68,7 @@
         </c:if>
         <br>
         <br>
-        <button onclick=window.location.href="/main_menu">Return to Main menu</button>
+        <button class="btn btn-info btn3d" onclick=window.location.href="/main_menu">Return to Main menu</button>
     </div>
     <div class="col-4"></div>
 </div>

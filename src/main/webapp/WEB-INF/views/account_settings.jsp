@@ -68,13 +68,13 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type="submit" value="Submit change"></td>
+                    <td><input class="btn btn-info btn3d" type="submit" value="Submit change"></td>
                 </tr>
             </table>
         </form:form>
         <br>
         <br>
-        <button onclick=window.location.href="/main_menu">Return to Main menu</button>
+        <button class="btn btn-info btn3d" onclick=window.location.href="/main_menu">Return to Main menu</button>
     </div>
     <div class="col-4>"></div>
 </body>

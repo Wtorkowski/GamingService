@@ -103,7 +103,6 @@ public class ConverterFactory {
         toDisplay.add(timePeriodToString(minutes, "minute"));
         toDisplay.add(timePeriodToString(seconds, "second"));
         String result = String.join("", toDisplay);
-
         return result.substring(0, result.length() - 1);
     }
 
@@ -136,5 +135,4 @@ public class ConverterFactory {
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         return decimalFormat.format(num);
     }
-
 }

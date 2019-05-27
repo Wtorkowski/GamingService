@@ -5,7 +5,6 @@ import com.gamingService.domain.model.User;
 import com.gamingService.domain.repositories.UserRepository;
 import com.gamingService.dto.EditUserDetailsDTO;
 import com.gamingService.dto.RegistrationFormDTO;
-import com.gamingService.dto.UserDTO;
 import com.gamingService.services.UserService;
 import com.gamingService.services.converters.ConverterFactory;
 import lombok.AllArgsConstructor;
@@ -27,11 +26,6 @@ public class UserServiceImpl implements UserService {
         User userToRegister = ConverterFactory.fromResourceToUser(registrationFormDTO);
         userRepository.save(userToRegister);
     }
-
-//    @Override
-//    public UserDTO currentUserDTO() {
-//        return loggedUser.value();
-//    }
 
     @Override
     public boolean checkIfValidPassword(String oldPassword) {

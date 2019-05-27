@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -21,7 +20,6 @@ public class User extends AbstractEntity {
 
     @Size(min = 3, max = 20)
     @Column(unique = true, nullable = false)
-    @UniqueElements
     private String username;
 
 

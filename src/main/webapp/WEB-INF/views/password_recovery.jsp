@@ -11,10 +11,8 @@
 <html>
 <head>
     <jsp:include page="fragments/header-link.jsp"/>
-
     <title>Password recovery</title>
     <style>
-
     </style>
 </head>
 <body>
@@ -23,6 +21,7 @@
     <div class="col-4"></div>
     <div class="col-4" align="center">
         <h1>Forgot your password?<br>
+            <br>
             3 simple ways to improve your memory:
             <ul>
                 <li>exercise your brain playing Mastermind</li>
@@ -31,9 +30,8 @@
             </ul>
         </h1>
 
-        I've used h1 tag just in case you're having problems with vision too.
         <br>
-        <button onclick=window.location.href="/login">Go back to Login page</button>
+        <button class="btn btn-info btn3d" onclick=window.location.href="/login">Go back to Login</button>
         <br>
         (One day this page will generate standard password recovery email)
     </div>

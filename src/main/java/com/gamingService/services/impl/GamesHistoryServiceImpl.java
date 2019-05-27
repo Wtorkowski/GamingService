@@ -1,6 +1,7 @@
 package com.gamingService.services.impl;
 
 import com.gamingService.core.components.LoggedUser;
+import com.gamingService.domain.model.EnumDifficulty;
 import com.gamingService.domain.model.GamesHistory;
 import com.gamingService.domain.model.MastermindAttempts;
 import com.gamingService.domain.repositories.GamesHistoryRepository;
@@ -21,7 +22,6 @@ import java.util.Random;
 @Service
 @AllArgsConstructor
 public class GamesHistoryServiceImpl implements GamesHistoryService {
-
 
     private GamesHistoryRepository gamesHistoryRepository;
     private MastermindAttemptsRepository mastermindAttemptsRepository;
@@ -120,9 +120,9 @@ public class GamesHistoryServiceImpl implements GamesHistoryService {
 
     private List<MastermindGameHistoryDTO> getMastermindDifficultyTop() {
         String userName = loggedUser.getName();
-        String easy = "easy";
-        String medium = "medium";
-        String hard = "hard";
+        String easy = EnumDifficulty.EASY.toString();
+        String medium = EnumDifficulty.MEDIUM.toString();
+        String hard = EnumDifficulty.HARD.toString();
         List<MastermindGameHistoryDTO> topScores = new ArrayList<>();
         if (gamesHistoryRepository.isTopScoreAvailable(userName, easy)) {
             topScores.add(setExistingMastermindTopScore(easy));
@@ -158,7 +158,7 @@ public class GamesHistoryServiceImpl implements GamesHistoryService {
 
     private int encryptedCodeBound(String difficulty) {
         int bound = 6;
-        if (difficulty.equals("easy")) {
+        if (difficulty.equals(EnumDifficulty.EASY.toString())) {
             bound = 4;
         }
         return bound;
@@ -166,7 +166,7 @@ public class GamesHistoryServiceImpl implements GamesHistoryService {
 
     private static int encryptedCodeLength(String difficulty) {
         int codeLength = 4;
-        if (difficulty.equals("hard")) {
+        if (difficulty.equals(EnumDifficulty.HARD.toString())) {
             codeLength = 5;
         }
         return codeLength;
