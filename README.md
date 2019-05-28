@@ -1,4 +1,4 @@
-Check it out on heroku: https://gaming-service.herokuapp.com/
+Check it out at heroku: https://gaming-service.herokuapp.com/
 
 # Gaming Service
 Gaming Service is my final Coders Lab bootcamp project. I have decided to build this kind of a program because it is something different from a typical CRUD-based small business manager. Currently Gaming Service consists of only one game: Mastermind. Although my program is not a rocket-science level app, I hope you are going to return to play Mastermind once in awhile.
