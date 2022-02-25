@@ -11,10 +11,7 @@
 <jsp:include page="fragments/logged_user.jsp"/>
 <div class="row">
     <div class="col-3"></div>
-    <div class="col-6 " align="center">
-        <c:out value="Ready to use registered players for demo purposes only:"/><br>
-       
-    </div>
+  
     <div class="col-3"></div>
 </div>
 <div class="row height70">
