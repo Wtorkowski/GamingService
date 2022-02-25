@@ -13,19 +13,7 @@
     <div class="col-3"></div>
     <div class="col-6 " align="center">
         <c:out value="Ready to use registered players for demo purposes only:"/><br>
-        <table>
-            <tr>
-                <td>1st time logged in:</td>
-                <td>"newbie"</td>
-                <td>Password1</td>
-            </tr>
-            <br>
-            <tr>
-                <td>Experienced player:</td>
-                <td>"veteran"</td>
-                <td>Password1</td>
-            </tr>
-        </table>
+       
     </div>
     <div class="col-3"></div>
 </div>
